@@ -1,0 +1,29 @@
+@import "../vendor/normalize.css";
+
+@import "../fonts/fonts.css";
+
+@import "../bloks/page/page.css";
+
+@import "../bloks/header/header.css";
+@import "../bloks/header/__logo/header__logo.css";
+
+@import "../bloks/profile/profile.css";
+@import "../bloks/profile/__avatar/profile__avatar.css";
+@import "../bloks/profile/__info/profile__info.css";
+@import "../bloks/profile/__info/profile__info-title/profile__info-title.css";
+@import "../bloks/profile/__info/profile__info-subtitle/profile__info-subtitle.css";
+
+@import "../bloks/add-button/add-button.css";
+@import "../bloks/edit-button/edit-button.css";
+
+@import "../bloks/elements/elements.css";
+
+@import "../bloks/element/element.css";
+@import "../bloks/element/__mask-group/element__mask-group.css";
+@import "../bloks/element/__description/element__description.css";
+@import "../bloks/element/__text/element__text.css";
+@import "../bloks/element/__vector/element__vector.css";
+
+
+@import "../bloks/footer/footer.css";
+@import "../bloks/footer/__author/footer__author.css";
