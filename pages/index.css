@@ -13,8 +13,13 @@
 @import "../bloks/profile/__info/profile__info-title/profile__info-title.css";
 @import "../bloks/profile/__info/profile__info-subtitle/profile__info-subtitle.css";
 
+@import "../bloks/form/form.css";
+@import "../bloks/form/__personal-info/form__personal-info.css";
+@import "../bloks/form/__item/form__item.css";
+
 @import "../bloks/add-button/add-button.css";
 @import "../bloks/edit-button/edit-button.css";
+@import "../bloks/edit-button/__vector/edit-button__vector.css";
 
 @import "../bloks/elements/elements.css";
 

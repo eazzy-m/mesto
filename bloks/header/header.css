@@ -6,3 +6,17 @@
     flex-direction: row;
     
 }
+
+@media screen and (max-width: 970px) {
+    .header {
+        width: 600px;
+        margin: 28px auto 36px;
+}
+}
+
+@media screen and (max-width: 620px) {
+    .header {
+        width: 320px;
+        margin: 28px auto 36px;
+}
+}

@@ -1,4 +1,5 @@
 .add-button {
+    grid-area: button;
     width: 150px;
     height: 50px;
     background-color: #000;
@@ -6,4 +7,19 @@
     box-sizing: border-box;
     border-radius: 2px;
     display: block;
+}
+
+.add-button:hover {
+    border: 2px solid #FFFFFF;
+    opacity: 0.6;
+  }
+  
+.add-button:focus {
+    opacity: 0.6;
+  }
+
+@media screen and (max-width: 970px) {
+    .add-button {
+        width: 282px;
+}
 }

@@ -12,20 +12,27 @@
     
     <main>
         <section class="profile">
+            <img class="profile__avatar" src="./images/image.png" alt="Это Вы">
             <div class="profile__info">
-                <img class="profile__avatar" src="./images/image.png" alt="Это Вы">
-                <div>
-                    <h1 class="profile__info-title">Жак-Ив Кусто</h1>
-                    <p class="profile__info-subtitle">Исследователь океана</p>
-                </div>
-                <button class="edit-button">
+                <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+                <button class="edit-button" type="submit">
                     <img class="edit-button__vector" src="./images/Vector-profile.png" alt="Изменить">
                 </button>
+                <p class="profile__info-subtitle">Исследователь океана</p>
             </div>
+            <form title="Редактировать профиль" class="form">
+                <fieldset class="form__personal-info">
+                    <input class="form__item" type="text" placeholder="Жак-Ив Кусто" required>
+                    <input class="form__item" type="text" placeholder="Исследователь океана" required>
+                    <button class="form__button" type="submit" value="Сохранить" name="сохранить">
+                </fieldset>
+            </form>
             <button class="add-button">
                 <img class="add-button__vector" src="./images/Vector-button.png" alt="Добавить">
             </button>
+
         </section>
+
         <section class="elements">
             <div class="element">
                 <img class="element__mask-group" src="./images/kirill-pershin-1088404-unsplash.png" alt="Сентинский храм. Карачаевский район, Село Нижняя Теберда">
@@ -74,5 +81,6 @@
     <footer class="footer">
         <p class="footer__author">&copy; 2021. Николай Козич</p>
     </footer>
+    <script src="./scripts/edit-profile.js"></script>
 </body>
 </html>

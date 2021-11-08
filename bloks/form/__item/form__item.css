@@ -1,0 +1,50 @@
+.form__item {
+    border: 0;
+    margin: 0 auto;
+    width: 358px;
+    height: 24px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #bcbcc4;
+    background-color: transparent;
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 17px;
+    font-family: inherit;
+  }
+  
+
+  .form__item::placeholder {
+    font-size: 14px;
+    line-height: 17px;
+    font-family: 'Inter';
+    color: #000;
+  }
+  .form__item::-ms-input-placeholder {
+    font-size: 14px;
+    line-height: 17px;
+    font-family: 'Inter';
+    color: #000;
+  }
+  .form__item::-moz-placeholder {
+    font-size: 14px;
+    line-height: 17px;
+    font-family: 'Inter';
+    color: #000;
+  }
+  .form__item::-webkit-input-placeholder {
+    font-size: 14px;
+    line-height: 17px;
+    font-family: 'Inter';
+    color: #000;
+  }
+
+  .form__button {
+      width: 358px;
+      min-height: 50px;
+      font-size: 18px;
+      line-height: 22px;
+      text-align: center;
+      margin: 48px auto 37px;
+      background-color: #000;
+      color: #fff;
+  }

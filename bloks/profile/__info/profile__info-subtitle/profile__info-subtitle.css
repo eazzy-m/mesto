@@ -5,3 +5,12 @@
     line-height: 22px;
     margin: 0;
 }
+
+@media screen and (max-width: 970px) {
+    .profile__info-subtitle {
+        font-size: 14px;
+        line-height: 17px;
+        text-align: end;
+        margin-bottom: 36px;
+}
+}
