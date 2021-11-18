@@ -10,8 +10,8 @@
 @import "../bloks/profile/profile.css";
 @import "../bloks/profile/__avatar/profile__avatar.css";
 @import "../bloks/profile/__info/profile__info.css";
-@import "../bloks/profile/__info/profile__info-title/profile__info-title.css";
-@import "../bloks/profile/__info/profile__info-subtitle/profile__info-subtitle.css";
+@import "../bloks/profile/__info-title/profile__info-title.css";
+@import "../bloks/profile/__info-subtitle/profile__info-subtitle.css";
 
 @import "../bloks/popup/popup.css";
 
