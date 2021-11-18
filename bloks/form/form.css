@@ -1,18 +1,17 @@
 .form {
     width: 430px;
-    min-height: 330px;
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
-    display: none;
-}
-
-.form:hover {
-    display: none;
+    padding: 34px 36px 37px;
+    box-sizing: border-box;
+    top: 195px;
+    margin: 0;
 }
 
 @media screen and (max-width: 970px) {
     .form {
         width: 282px;
+        padding: 25px 22px 25px;
     }
 }

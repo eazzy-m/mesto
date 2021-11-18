@@ -20,13 +20,17 @@
                 </button>
                 <p class="profile__info-subtitle">Исследователь океана</p>
             </div>
-            <form title="Редактировать профиль" class="form">
-                <fieldset class="form__personal-info">
-                    <input class="form__item" type="text" placeholder="Жак-Ив Кусто" required>
-                    <input class="form__item" type="text" placeholder="Исследователь океана" required>
-                    <button class="form__button" type="submit" value="Сохранить" name="сохранить">
-                </fieldset>
-            </form>
+            <div class="popup popup_close">
+                <button class="exit-button" type="reset" aria-label="выйти" value="выйти" name="выйти">
+                    <img class="exit-button__vector" src="./images/closeicon.png" alt="выйти">
+                </button>
+                <form class="form">
+                    <h3 class="form__title">Редактировать профиль</h3>
+                    <input class="form__item name" type="text" placeholder="Жак-Ив Кусто" required>
+                    <input class="form__item job" type="text" placeholder="Исследователь океана" required>
+                    <button class="form__button" type="button">Cохранить</button>
+                </form>
+            </div>
             <button class="add-button">
                 <img class="add-button__vector" src="./images/Vector-button.png" alt="Добавить">
             </button>

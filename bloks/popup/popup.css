@@ -1,0 +1,23 @@
+.popup {
+    min-height: 370px;
+    width: 470px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    top: 155px;
+    z-index: 2;
+    box-sizing: border-box;
+}
+
+.popup_close {
+    display: none;
+}
+
+@media screen and (max-width: 970px) {
+    .popup {
+        min-height: 358px;
+        width: 282px;
+        top: 87px;
+    }
+}

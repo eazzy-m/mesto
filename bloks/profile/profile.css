@@ -12,7 +12,6 @@
 @media screen and (max-width: 970px) {
     .profile {
         width: 282px;
-        margin: 28px auto 36px;
         grid-template-areas: 
         "img"
         "div"
