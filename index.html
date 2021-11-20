@@ -2,12 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./pages/index.css" rel="stylesheet">
     <title>Место</title>
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/Vector-logo.png" alt="Место">
+        <img class="header__logo" src="./images/HeaderLogo.svg" alt="Место">
     </header>
     
     <main>
@@ -15,69 +16,80 @@
             <img class="profile__avatar" src="./images/image.png" alt="Это Вы">
             <div class="profile__info">
                 <h1 class="profile__info-title">Жак-Ив Кусто</h1>
-                <button class="edit-button" type="submit">
-                    <img class="edit-button__vector" src="./images/Vector-profile.png" alt="Изменить">
+                <button class="edit-button" type="button">
+                    <img class="edit-button__vector" src="./images/edit-vector.svg" alt="Изменить">
                 </button>
                 <p class="profile__info-subtitle">Исследователь океана</p>
             </div>
-            <div class="popup popup_close">
+            <button class="add-button">
+                <img class="add-button__vector" src="./images/add-button.svg" alt="Добавить">
+            </button>
+        </section>
+
+        <section class="popup popup_close">
+            <div class="popup__container">
                 <button class="exit-button" type="reset" aria-label="выйти" value="выйти" name="выйти">
-                    <img class="exit-button__vector" src="./images/closeicon.png" alt="выйти">
                 </button>
-                <form class="form">
-                    <h3 class="form__title">Редактировать профиль</h3>
-                    <input class="form__item name" type="text" placeholder="Жак-Ив Кусто" required>
-                    <input class="form__item job" type="text" placeholder="Исследователь океана" required>
-                    <button class="form__button" type="button">Cохранить</button>
+                <form class="form" name="profile_info" method="POST">
+                    <div class="form__container">
+                        <h3 class="form__title">Редактировать профиль</h3>
+                        <input class="form__item form__item_info_title"
+                               name="profile_info_title"
+                               type="text"
+                               placeholder="Жак-Ив Кусто"
+                               required>
+                        <input class="form__item form__item_info_subtitle"
+                               name="profile_info_subtitle"
+                               type="text"
+                               placeholder="Исследователь океана"
+                               required>
+                        <button class="form__button" type="submit">Cохранить</button>
+                    </div>
                 </form>
             </div>
-            <button class="add-button">
-                <img class="add-button__vector" src="./images/Vector-button.png" alt="Добавить">
-            </button>
-
         </section>
 
         <section class="elements">
             <div class="element">
                 <img class="element__mask-group" src="./images/kirill-pershin-1088404-unsplash.png" alt="Сентинский храм. Карачаевский район, Село Нижняя Теберда">
                 <div class="element__description">
-                    <p class="element__text">Карачаевск</p>
-                    <img class="element__vector" src="./images/Vector-like.svg" alt="Лайк">
+                    <h3 class="element__text">Карачаевск</h3>
+                    <button class="like-button" type="button"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__mask-group" src="./images/kirill-pershin-1404681-unsplash.png" alt="Вид издалека на гору Эльбрус">
                 <div class="element__description">
-                    <p class="element__text">Гора Эльбрус</p>
-                    <img class="element__vector" src="./images/Vector-like.svg" alt="Лайк">
+                    <h3 class="element__text">Гора Эльбрус</h3>
+                    <button class="like-button" type="button"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__mask-group" src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай. Межгорье у северного подножья Кавказского хребта.">
                 <div class="element__description">
-                    <p class="element__text">Домбай</p>
-                    <img class="element__vector" src="./images/Vector-like.svg" alt="Лайк">
+                    <h3 class="element__text">Домбай</h3>
+                    <button class="like-button" type="button"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__mask-group" src="./images/field-g4e6bc428f_640.jpg" alt="Изображение Hervé Lagrange с сайта pixabay.com">
                 <div class="element__description">
-                    <p class="element__text">Многолетний дуб</p>
-                    <img class="element__vector" src="./images/Vector-like.svg" alt="Лайк">
+                    <h3 class="element__text">Многолетний дуб</h3>
+                    <button class="like-button" type="button"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__mask-group" src="./images/port-g29a566a5d_640.jpg" alt="Изображение Leonhard Niederwimmer с сайта pixabay.com">
                 <div class="element__description">
-                    <p class="element__text">Порт</p>
-                    <img class="element__vector" src="./images/Vector-like.svg" alt="Лайк">
+                    <h3 class="element__text">Порт</h3>
+                    <button class="like-button" type="button"></button>
                 </div>
             </div>
             <div class="element">
                 <img class="element__mask-group" src="./images/nature-g87d19cf36_640.jpg" alt="Изображение Albrecht Fietz с сайта pixabay.com">
                 <div class="element__description">
-                    <p class="element__text">Сельская местность</p>
-                    <img class="element__vector" src="./images/Vector-like.svg" alt="Лайк">
+                    <h3 class="element__text">Сельская местность</h3>
+                    <button class="like-button" type="button"></button>
                 </div>
             </div>
         </section>

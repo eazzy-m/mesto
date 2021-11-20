@@ -14,8 +14,11 @@
 @import "../bloks/profile/__info-subtitle/profile__info-subtitle.css";
 
 @import "../bloks/popup/popup.css";
+@import "../bloks/popup/__container/popup__container.css";
+@import "../bloks/popup/_close/popup_close.css";
 
 @import "../bloks/form/form.css";
+@import "../bloks/form/__container/form__container.css";
 @import "../bloks/form/__title/form__title.css";
 @import "../bloks/form/__item/form__item.css";
 @import "../bloks/form/__button/form__button.css";
@@ -32,7 +35,7 @@
 @import "../bloks/element/__mask-group/element__mask-group.css";
 @import "../bloks/element/__description/element__description.css";
 @import "../bloks/element/__text/element__text.css";
-@import "../bloks/element/__vector/element__vector.css";
+@import "../bloks/like-button/like-button.css";
 
 
 @import "../bloks/footer/footer.css";

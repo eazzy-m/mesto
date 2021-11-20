@@ -1,17 +1,7 @@
 .form {
-    width: 430px;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 34px 36px 37px;
-    box-sizing: border-box;
-    top: 195px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255,255,255,0);
     margin: 0;
-}
-
-@media screen and (max-width: 970px) {
-    .form {
-        width: 282px;
-        padding: 25px 22px 25px;
-    }
+    padding: 0;
 }
