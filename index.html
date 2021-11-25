@@ -33,7 +33,7 @@
                 <button class="exit-button" type="reset" aria-label="выйти" value="выйти" name="выйти">
                 </button>
 
-                <form class="form form_close" name="profile_info" method="POST">
+                <form class="form form_close edit-profile-form" name="profile_info" method="POST">
                     <div class="form__container">
                         <h3 class="form__title">Редактировать профиль</h3>
                         <input class="form__item form__item_info_title"
@@ -54,7 +54,7 @@
                     </div>
                 </form>
 
-                <form class="form add-form_close" name="profile_info" method="POST">
+                <form class="form add-form_close add-card-form" name="profile_info" method="POST">
                     <div class="form__container">
                         <h3 class="form__title">Новое место</h3>
                         <input class="form__item form__item_place-name"
@@ -70,7 +70,7 @@
                                placeholder="Ссылка на картинку"
                                value=""
                                required>
-                        <button class="form__button add-card-form-button" aria-label="Cохранить" type="submit">Создать</button>
+                        <button class="form__button " aria-label="Создать" type="submit">Создать</button>
                     </div>
                 </form>
 
@@ -78,48 +78,7 @@
         </section>
 
         <section class="elements">
-<!--            <div class="element">-->
-<!--                <img class="element__mask-group" src="./images/kirill-pershin-1088404-unsplash.png" alt="Сентинский храм. Карачаевский район, Село Нижняя Теберда">-->
-<!--                <div class="element__description">-->
-<!--                    <h2 class="element__text">Карачаевск</h2>-->
-<!--                    <button class="like-button" type="button" aria-label="нравится"></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="element">-->
-<!--                <img class="element__mask-group" src="./images/kirill-pershin-1404681-unsplash.png" alt="Вид издалека на гору Эльбрус">-->
-<!--                <div class="element__description">-->
-<!--                    <h2 class="element__text">Гора Эльбрус</h2>-->
-<!--                    <button class="like-button" type="button" aria-label="нравится"></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="element">-->
-<!--                <img class="element__mask-group" src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай. Межгорье у северного подножья Кавказского хребта.">-->
-<!--                <div class="element__description">-->
-<!--                    <h2 class="element__text">Домбай</h2>-->
-<!--                    <button class="like-button" type="button" aria-label="нравится"></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="element">-->
-<!--                <img class="element__mask-group" src="./images/field-g4e6bc428f_640.jpg" alt="Изображение Hervé Lagrange с сайта pixabay.com">-->
-<!--                <div class="element__description">-->
-<!--                    <h2 class="element__text">Многолетний дуб</h2>-->
-<!--                    <button class="like-button" type="button" aria-label="нравится"></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="element">-->
-<!--                <img class="element__mask-group" src="./images/port-g29a566a5d_640.jpg" alt="Изображение Leonhard Niederwimmer с сайта pixabay.com">-->
-<!--                <div class="element__description">-->
-<!--                    <h2 class="element__text">Порт</h2>-->
-<!--                    <button class="like-button" type="button" aria-label="нравится"></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="element">-->
-<!--                <img class="element__mask-group" src="./images/nature-g87d19cf36_640.jpg" alt="Изображение Albrecht Fietz с сайта pixabay.com">-->
-<!--                <div class="element__description">-->
-<!--                    <h2 class="element__text">Сельская местность</h2>-->
-<!--                    <button class="like-button" type="button" aria-label="нравится"></button>-->
-<!--                </div>-->
-<!--            </div>-->
+
         </section>
 
     </main>
@@ -129,6 +88,7 @@
 
     <template id="element-template">
         <div class="element">
+            <button class="remove-element-button" type="button" aria-label="удалить"></button>
             <img class="element__mask-group" src="#" alt="">
             <div class="element__description">
                 <h2 class="element__text"></h2>
