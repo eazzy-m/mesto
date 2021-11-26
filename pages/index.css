@@ -2,44 +2,49 @@
 
 @import "../fonts/fonts.css";
 
-@import "../bloks/page/page.css";
+@import "../blocks/page/page.css";
 
-@import "../bloks/header/header.css";
-@import "../bloks/header/__logo/header__logo.css";
+@import "../blocks/header/header.css";
+@import "../blocks/header/__logo/header__logo.css";
 
-@import "../bloks/profile/profile.css";
-@import "../bloks/profile/__avatar/profile__avatar.css";
-@import "../bloks/profile/__info/profile__info.css";
-@import "../bloks/profile/__info-title/profile__info-title.css";
-@import "../bloks/profile/__info-subtitle/profile__info-subtitle.css";
+@import "../blocks/profile/profile.css";
+@import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__info/profile__info.css";
+@import "../blocks/profile/__info-title/profile__info-title.css";
+@import "../blocks/profile/__info-subtitle/profile__info-subtitle.css";
 
-@import "../bloks/popup/popup.css";
-@import "../bloks/popup/__container/popup__container.css";
-@import "../bloks/popup/_close/popup_close.css";
+@import "../blocks/popup/popup.css";
+@import "../blocks/popup/__container/popup__container.css";
+@import "../blocks/popup/__container/_zoom-image/popup__container_zoom-image.css";
+@import "../blocks/popup/__figure/popup__figure.css";
+@import "../blocks/popup/__figure-img/popup__figure-img.css";
+@import "../blocks/popup/__figcaption/popup__figcaption.css";
+@import "../blocks/popup/_open/popup_open.css";
 
-@import "../bloks/form/form.css";
-@import "../bloks/form/_close/form_close.css";
-@import "../bloks/form/__container/form__container.css";
-@import "../bloks/form/__title/form__title.css";
-@import "../bloks/form/__item/form__item.css";
-@import "../bloks/form/__button/form__button.css";
+@import "../blocks/form/form.css";
+@import "../blocks/form/_close/form_close.css";
+@import "../blocks/form/__container/form__container.css";
+@import "../blocks/form/__title/form__title.css";
+@import "../blocks/form/__item/form__item.css";
+@import "../blocks/form/__button/form__button.css";
 
-@import "../bloks/add-button/add-button.css";
-@import "../bloks/edit-button/edit-button.css";
-@import "../bloks/edit-button/__vector/edit-button__vector.css";
-@import "../bloks/exit-button/exit-button.css";
-@import "../bloks/exit-button/__vector/exit-button__vector.css";
+@import "../blocks/add-button/add-button.css";
+@import "../blocks/edit-button/edit-button.css";
+@import "../blocks/edit-button/__vector/edit-button__vector.css";
+@import "../blocks/exit-button/exit-button.css";
+@import "../blocks/exit-button/__vector/exit-button__vector.css";
+@import "../blocks/delete-element-button/delete-element-button.css";
 
-@import "../bloks/elements/elements.css";
+@import "../blocks/elements/elements.css";
+@import "../blocks/opacity/opacity.css";
 
-@import "../bloks/element/element.css";
-@import "../bloks/element/__template/element__template.css";
-@import "../bloks/element/__mask-group/element__mask-group.css";
-@import "../bloks/element/__description/element__description.css";
-@import "../bloks/element/__text/element__text.css";
+@import "../blocks/element/element.css";
+@import "../blocks/element/__mask-group/element__mask-group.css";
+@import "../blocks/element/__description/element__description.css";
+@import "../blocks/element/__text/element__text.css";
 
-@import "../bloks/like-button/like-button.css";
-@import "../bloks/like-button/_active/like-button_active.css";
+@import "../blocks/like-button/like-button.css";
+@import "../blocks/like-button/_active/like-button_active.css";
 
-@import "../bloks/footer/footer.css";
-@import "../bloks/footer/__author/footer__author.css";
+@import "../blocks/footer/footer.css";
+@import "../blocks/footer/__author/footer__author.css";

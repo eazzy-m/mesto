@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./pages/index.css" rel="stylesheet">
+    <link rel="preload" href="./blocks/form/form.css" as="style">
     <title>Место</title>
 </head>
 <body class="page">
@@ -16,24 +17,23 @@
             <img class="profile__avatar" src="./images/image.png" alt="Это Вы">
             <div class="profile__info">
                 <h1 class="profile__info-title">Жак-Ив Кусто</h1>
-                <button class="edit-button" type="button" aria-label="изменить">
+                <button class="edit-button opacity" type="button" aria-label="изменить">
                     <img class="edit-button__vector" src="./images/edit-vector.svg" alt="Изменить">
                 </button>
                 <p class="profile__info-subtitle">Исследователь океана</p>
             </div>
 
-            <button class="add-button" type="button" aria-label="добавить">
+            <button class="add-button opacity" type="button" aria-label="добавить">
                 <img class="add-button__vector" src="./images/add-button.svg" alt="Добавить">
             </button>
 
         </section>
 
-        <section class="popup popup_close">
+        <section class="popup popup_profile">
             <div class="popup__container">
-                <button class="exit-button" type="reset" aria-label="выйти" value="выйти" name="выйти">
+                <button class="exit-button exit-button_popup_profile opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
                 </button>
-
-                <form class="form form_close edit-profile-form" name="profile_info" method="POST">
+                <form class="form  edit-profile-form" name="profile_info" method="POST">
                     <div class="form__container">
                         <h3 class="form__title">Редактировать профиль</h3>
                         <input class="form__item form__item_info_title"
@@ -50,11 +50,17 @@
                                value=""
                                maxlength="50"
                                required>
-                        <button class="form__button" aria-label="Cохранить" type="submit">Cохранить</button>
+                        <button class="opacity form__button" aria-label="Cохранить" type="submit">Cохранить</button>
                     </div>
                 </form>
+            </div>
+        </section>
 
-                <form class="form add-form_close add-card-form" name="profile_info" method="POST">
+        <section class="popup popup_elements">
+            <div class="popup__container">
+                <button class="exit-button exit-button_popup_elements opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
+                </button>
+                <form class="form add-card-form" name="profile_info" method="POST">
                     <div class="form__container">
                         <h3 class="form__title">Новое место</h3>
                         <input class="form__item form__item_place-name"
@@ -70,10 +76,20 @@
                                placeholder="Ссылка на картинку"
                                value=""
                                required>
-                        <button class="form__button " aria-label="Создать" type="submit">Создать</button>
+                        <button class="opacity form__button" aria-label="Создать" type="submit">Создать</button>
                     </div>
                 </form>
 
+            </div>
+        </section>
+        <section class="popup popup_zoom-image">
+            <div class="popup__container_zoom-image">
+                <button class="exit-button exit-button_zoom-image opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
+                </button>
+                <figure class="popup__figure" >
+                    <img src="#" alt="" class="popup__figure-img">
+                    <figcaption class="popup__figcaption"></figcaption>
+                </figure>
             </div>
         </section>
 
@@ -88,11 +104,11 @@
 
     <template id="element-template">
         <div class="element">
-            <button class="remove-element-button" type="button" aria-label="удалить"></button>
+            <button class="delete-element-button opacity" type="button" aria-label="удалить"></button>
             <img class="element__mask-group" src="#" alt="">
             <div class="element__description">
                 <h2 class="element__text"></h2>
-                <button class="like-button" type="button" aria-label="нравится"></button>
+                <button class="like-button opacity" type="button" aria-label="нравится"></button>
             </div>
         </div>
     </template>
