@@ -5,8 +5,3 @@
     z-index: 2;
     box-sizing: border-box;
 }
-
-@media screen and (max-width: 970px) {
-    .popup__container_zoom-image {
-    }
-}

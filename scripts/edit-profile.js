@@ -1,27 +1,27 @@
-let container = document.querySelector('.page');
+const container = document.querySelector('.page');
 
-let editButton = container.querySelector('.edit-button');
-let addButton = container.querySelector('.add-button');
-let exitProfileButton = container.querySelector('.exit-button_popup_profile');
-let exitElementsButton = container.querySelector('.exit-button_popup_elements');
-let exitZoomImageButton = container.querySelector('.exit-button_zoom-image-popup');
-let saveButton = container.querySelector('.edit-profile-form');
+const editButton = container.querySelector('.edit-button');
+const addButton = container.querySelector('.add-button');
+const exitProfileButton = container.querySelector('.exit-button_popup_profile');
+const exitElementsButton = container.querySelector('.exit-button_popup_elements');
+const exitZoomImageButton = container.querySelector('.exit-button_zoom-image-popup');
+const saveButton = container.querySelector('.edit-profile-form');
 
 
-let popupEditProfile = container.querySelector('.popup_profile');
-let popupAddCards = container.querySelector('.popup_elements');
-let popupZoomImage = container.querySelector('.popup_zoom-image');
+const popupEditProfile = container.querySelector('.popup_profile');
+const popupAddCards = container.querySelector('.popup_elements');
+const popupZoomImage = container.querySelector('.popup_zoom-image');
 
-let name = container.querySelector('.form__item_info_title');
-let job = container.querySelector('.form__item_info_subtitle');
-let profileTitle = container.querySelector('.profile__info-title');
-let profileSubtitle = container.querySelector('.profile__info-subtitle');
-let editProfileForm = container.querySelector('.form');
-let addCardForm = container.querySelector('.add-card-form');
+const name = container.querySelector('.form__item_info_title');
+const job = container.querySelector('.form__item_info_subtitle');
+const profileTitle = container.querySelector('.profile__info-title');
+const profileSubtitle = container.querySelector('.profile__info-subtitle');
+const editProfileForm = container.querySelector('.form');
+const addCardForm = container.querySelector('.add-card-form');
 
 
 const cardTemplate = document.querySelector('#element-template').content;
-let elements = container.querySelector('.elements');
+const elements = container.querySelector('.elements');
 const initialCards = [
     {
         name: 'Архыз',
@@ -120,7 +120,7 @@ function showEditProfileForm() {
 
 function showAddCardForm() {
     PopupAddCards();
-    addCardForm.classList.add('add-form_open');
+    addCardForm.classList.add('form_open');
 }
 
 function closeProfileForm() {
@@ -130,7 +130,7 @@ function closeProfileForm() {
 
 function closeAddCardsForm() {
     popupAddCards.classList.remove('popup_open');
-    addCardForm.classList.remove('add-form_open');
+    addCardForm.classList.remove('form_open');
 }
 
 function closeZoomImage() {
