@@ -4,7 +4,7 @@ let editButton = container.querySelector('.edit-button');
 let addButton = container.querySelector('.add-button');
 let exitProfileButton = container.querySelector('.exit-button_popup_profile');
 let exitElementsButton = container.querySelector('.exit-button_popup_elements');
-let exitZoomImageButton = container.querySelector('.exit-button_zoom-image');
+let exitZoomImageButton = container.querySelector('.exit-button_zoom-image-popup');
 let saveButton = container.querySelector('.edit-profile-form');
 
 
@@ -122,18 +122,6 @@ function showAddCardForm() {
     PopupAddCards();
     addCardForm.classList.add('add-form_open');
 }
-
-// function closeForm() {
-//     if ( popupEditProfile.classList.contains('popup_open')) {
-//         popupEditProfile.classList.remove('popup_open');
-//         editProfileForm.classList.add('form_close');
-//     } else if (popupAddCards.classList.contains('popup_open')) {
-//         popupAddCards.classList.remove('popup_open');
-//         addCardForm.classList.add('add-form_close');
-//     } else if (popupZoomImage.classList.contains('popup_open')) {
-//         popupZoomImage.classList.remove('popup_open');
-//     }
-// }
 
 function closeProfileForm() {
     popupEditProfile.classList.remove('popup_open');

@@ -1,6 +1,4 @@
 .popup__container_zoom-image {
-    max-width: calc(75vw + 40px);
-    max-height: calc(75vh);
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -10,7 +8,5 @@
 
 @media screen and (max-width: 970px) {
     .popup__container_zoom-image {
-        max-width: calc(75vw);
-        max-height: calc(75vh + 16px + 20px);
     }
 }

@@ -32,6 +32,7 @@
 @import "../blocks/edit-button/edit-button.css";
 @import "../blocks/edit-button/__vector/edit-button__vector.css";
 @import "../blocks/exit-button/exit-button.css";
+@import "../blocks/exit-button/_zoom-image-popup/exit-button_zoom-image-popup.css";
 @import "../blocks/exit-button/__vector/exit-button__vector.css";
 @import "../blocks/delete-element-button/delete-element-button.css";
 
