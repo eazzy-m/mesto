@@ -15,7 +15,7 @@
 
 @import "../blocks/popup/popup.css";
 @import "../blocks/popup/__container/popup__container.css";
-@import "../blocks/popup/__container/_zoom/popup__container_zoom.css";
+@import "../blocks/popup/__container-zoom/popup__container-zoom.css";
 @import "../blocks/popup/__figure/popup__figure.css";
 @import "../blocks/popup/__figure-img/popup__figure-img.css";
 @import "../blocks/popup/__figcaption/popup__figcaption.css";
