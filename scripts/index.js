@@ -77,10 +77,14 @@ function addCards(element) {
         figcaption.textContent= img.alt;
     })
 
-    elements.prepend(card);
+    return card;
+}
+function showDefaultCards(card) {
+    const defaultCards = addCards(card);
+    elements.append(defaultCards)
 }
 
-initialCards.forEach(addCards);
+initialCards.forEach(showDefaultCards);
 
 function createCard(evt) {
     evt.preventDefault();
@@ -88,8 +92,9 @@ function createCard(evt) {
         name: addCardFormPlaceName.value,
         link: addCardFormImageSrc.value,
     }
-    addCards(cardInfo);
+    const newCards = addCards(cardInfo);
 
+    elements.prepend(newCards);
 }
 
 addCardForm.addEventListener('submit', function (evt) {
