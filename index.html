@@ -32,24 +32,33 @@
             <div class="popup__container">
                 <button class="exit-button exit-button_popup_profile opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
                 </button>
-                <form class="form edit-profile-form" name="profile_info" method="POST">
+                <form class="form edit-profile-form"
+                      name="profile_info"
+                      method="POST"
+                      novalidate>
                     <div class="form__container">
                         <h3 class="form__title">Редактировать профиль</h3>
-                        <input class="form__item form__item_info_title"
+                        <input class="form__input form__item_info_title"
                                name="profile_info_title"
                                type="text"
                                placeholder="Жак-Ив Кусто"
                                value=""
-                               maxlength="20"
+                               minlength="2"
+                               maxlength="40"
+                               id="title-input"
                                required>
-                        <input class="form__item form__item_info_subtitle"
+                        <span class="form__input-error title-input-error"></span>
+                        <input class="form__input form__item_info_subtitle"
                                name="profile_info_subtitle"
                                type="text"
                                placeholder="Исследователь океана"
                                value=""
-                               maxlength="50"
+                               minlength="2"
+                               maxlength="200"
+                               id="subtitle-input"
                                required>
-                        <button class="opacity form__button" aria-label="Cохранить" type="submit">Cохранить</button>
+                        <span class="form__input-error subtitle-input-error"></span>
+                        <button class="opacity form__submit" aria-label="Cохранить" type="submit">Cохранить</button>
                     </div>
                 </form>
             </div>
@@ -59,23 +68,31 @@
             <div class="popup__container">
                 <button class="exit-button exit-button_popup_elements opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
                 </button>
-                <form class="form add-card-form" name="profile_info" method="POST">
+                <form class="form add-card-form"
+                      name="profile_info"
+                      method="POST"
+                      novalidate>
                     <div class="form__container">
                         <h3 class="form__title">Новое место</h3>
-                        <input class="form__item form__item_place-name"
+                        <input class="form__input form__item_place-name"
                                name="profile_info_title"
                                type="text"
                                placeholder="Название"
                                value=""
-                               maxlength="20"
+                               minlength="2"
+                               maxlength="30"
+                               id="place-input"
                                required>
-                        <input class="form__item form__item_place-image-source"
+                        <span class="form__input-error place-input-error"></span>
+                        <input class="form__input form__item_place-image-source"
                                name="profile_info_subtitle"
                                type="url"
                                placeholder="Ссылка на картинку"
                                value=""
+                               id="url-input"
                                required>
-                        <button class="opacity form__button" aria-label="Создать" type="submit">Создать</button>
+                        <span class="form__input-error url-input-error"></span>
+                        <button class="opacity form__submit" aria-label="Создать" type="submit">Создать</button>
                     </div>
                 </form>
             </div>
@@ -110,6 +127,7 @@
             </div>
         </div>
     </template>
+    <script src="scripts/validation.js"></script>
     <script src="scripts/index.js"></script>
 </body>
 </html>

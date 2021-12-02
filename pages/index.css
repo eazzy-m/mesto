@@ -22,11 +22,14 @@
 @import "../blocks/popup/_open/popup_open.css";
 
 @import "../blocks/form/form.css";
-@import "../blocks/form/_open/form_open.css";
+
 @import "../blocks/form/__container/form__container.css";
 @import "../blocks/form/__title/form__title.css";
-@import "../blocks/form/__item/form__item.css";
-@import "../blocks/form/__button/form__button.css";
+@import "../blocks/form/__input/form__input.css";
+@import "../blocks/form/__input/_type/_error/form__input_type_error.css";
+@import "../blocks/form/__submit/form__submit.css";
+@import "../blocks/form/__submit/_inactive/form__submit_inactive.css";
+@import "../blocks/form/__input-error/form__input-error.css";
 
 @import "../blocks/add-button/add-button.css";
 @import "../blocks/edit-button/edit-button.css";

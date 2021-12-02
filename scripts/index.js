@@ -54,7 +54,7 @@ const initialCards = [
 ];
 
 
-function addCards(element) {
+function cardsBuilder(element) {
     // cards render
     const card = cardTemplate.querySelector('.element').cloneNode(true);
     card.querySelector('.element__text').textContent = element.name;
@@ -79,8 +79,9 @@ function addCards(element) {
 
     return card;
 }
+
 function showDefaultCards(card) {
-    const defaultCards = addCards(card);
+    const defaultCards = cardsBuilder(card);
     elements.append(defaultCards)
 }
 
@@ -92,10 +93,10 @@ function createCard(evt) {
         name: addCardFormPlaceName.value,
         link: addCardFormImageSrc.value,
     }
-    const newCards = addCards(cardInfo);
-
+    const newCards = cardsBuilder(cardInfo);
     elements.prepend(newCards);
 }
+
 
 addCardForm.addEventListener('submit', function (evt) {
     createCard(evt)
@@ -138,15 +139,18 @@ exitZoomImageButton.addEventListener('click', function () {
 })
 
 addButton.addEventListener('click', showAddCardPopup);
+
 editButton.addEventListener('click', showEditProfileForm);
+
 exitProfileButton.addEventListener('click', function () {
     popupClose(popupEditProfile);
 });
+
 exitElementsButton.addEventListener('click', function () {
     popupClose(popupAddCards);
 });
-saveButton.addEventListener('submit', formSubmitHandler);
 
+saveButton.addEventListener('submit', formSubmitHandler);
 
 
 
