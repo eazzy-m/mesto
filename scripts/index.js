@@ -118,6 +118,23 @@ function showAddCardPopup() {
 function popupOpen(popup) {
     popup.classList.add('popup_open');
 }
+
+const closePopupByEcs = (evt) => {
+    if (evt.key === 'Escape') {
+        const popup = container.querySelector('.popup_open');
+        popupClose(popup);
+    }
+}
+const closePopupByMousedown = (evt) => {
+    if (evt.target.classList.contains('popup_open')) {
+        const popup = container.querySelector('.popup_open')
+        popupClose(popup);
+    }
+};
+
+container.addEventListener('keydown', closePopupByEcs);
+container.addEventListener('mousedown', closePopupByMousedown);
+
 function popupClose(popup) {
     popup.classList.remove('popup_open');
 }
