@@ -12,13 +12,13 @@ const popupEditProfile = container.querySelector('.popup_profile');
 const popupAddCards = container.querySelector('.popup_elements');
 const popupZoomImage = container.querySelector('.popup_zoom-image');
 
-const name = container.querySelector('.form__item_title');
-const job = container.querySelector('.form__item_subtitle');
+const name = container.querySelector('#title-input');
+const job = container.querySelector('#subtitle-input');
 const profileTitle = container.querySelector('.profile__info-title');
 const profileSubtitle = container.querySelector('.profile__info-subtitle');
 const addCardForm = container.querySelector('.add-card-form');
-const addCardFormPlaceName = container.querySelector('.form__item_place');
-const addCardFormImageSrc = container.querySelector('.form__item_image');
+const addCardFormPlaceName = container.querySelector('#place-input');
+const addCardFormImageSrc = container.querySelector('#url-input');
 
 const cardTemplate = document.querySelector('#element-template').content;
 const elements = container.querySelector('.elements');
