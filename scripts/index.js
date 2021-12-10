@@ -116,8 +116,9 @@ function popupOpen(popup) {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupByEcs);
     document.addEventListener('mousedown', closePopupByMousedown);
-    document.querySelector('.form__submit_elements').classList.add('form__submit_inactive');
-    document.querySelector('.form__submit_elements').disabled = true;
+    const formSubmit = popup.querySelector('.form__submit');
+    formSubmit.classList.add('form__submit_inactive');
+    formSubmit.disabled = true;
 }
 
 const closePopupByEcs = (evt) => {
