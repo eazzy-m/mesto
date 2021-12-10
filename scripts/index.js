@@ -112,10 +112,11 @@ const showEditProfileForm = () => {
 }
 
 
-function popupOpen(popup) {
+const popupOpen = (popup) => {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupByEcs);
     document.addEventListener('mousedown', closePopupByMousedown);
+    // if popup has submit button inactive it
     if (popup.querySelector('.form__submit')) {
         popup.querySelector('.form__submit').classList.add('form__submit_inactive');
         popup.querySelector('.form__submit').disabled = true;
