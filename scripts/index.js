@@ -1,31 +1,29 @@
 
-const container = document.querySelector('.page');
-
-const editButton = container.querySelector('.edit-button');
-const addButton = container.querySelector('.add-button');
-const exitProfileButton = container.querySelector('.exit-button_popup_profile');
-const exitElementsButton = container.querySelector('.exit-button_popup_elements');
-const exitZoomImageButton = container.querySelector('.exit-button_zoom-image-popup');
-const saveButton = container.querySelector('.edit-profile-form');
+const editButton = document.querySelector('.edit-button');
+const addButton = document.querySelector('.add-button');
+const exitProfileButton = document.querySelector('.exit-button_popup_profile');
+const exitElementsButton = document.querySelector('.exit-button_popup_elements');
+const exitZoomImageButton = document.querySelector('.exit-button_zoom-image-popup');
+const saveButton = document.querySelector('.edit-profile-form');
 
 
-const popupEditProfile = container.querySelector('.popup_profile');
-const popupAddCards = container.querySelector('.popup_elements');
-const popupZoomImage = container.querySelector('.popup_zoom-image');
+const popupEditProfile = document.querySelector('.popup_profile');
+const popupAddCards = document.querySelector('.popup_elements');
+const popupZoomImage = document.querySelector('.popup_zoom-image');
 
-const name = container.querySelector('#title-input');
-const job = container.querySelector('#subtitle-input');
-const profileTitle = container.querySelector('.profile__info-title');
-const profileSubtitle = container.querySelector('.profile__info-subtitle');
-const addCardForm = container.querySelector('.add-card-form');
-const addCardFormPlaceName = container.querySelector('#place-input');
-const addCardFormImageSrc = container.querySelector('#url-input');
+const name = document.querySelector('#title-input');
+const job = document.querySelector('#subtitle-input');
+const profileTitle = document.querySelector('.profile__info-title');
+const profileSubtitle = document.querySelector('.profile__info-subtitle');
+const addCardForm = document.querySelector('.add-card-form');
+const addCardFormPlaceName = document.querySelector('#place-input');
+const addCardFormImageSrc = document.querySelector('#url-input');
 
 const cardTemplate = document.querySelector('#element-template').content;
-const elements = container.querySelector('.elements');
+const elements = document.querySelector('.elements');
 
-const figureImg = container.querySelector('.popup__figure-img');
-const figcaption = container.querySelector('.popup__figcaption');
+const figureImg = document.querySelector('.popup__figure-img');
+const figcaption = document.querySelector('.popup__figcaption');
 
 const initialCards = [
     {
@@ -116,20 +114,23 @@ const showEditProfileForm = () => {
 
 function popupOpen(popup) {
     popup.classList.add('popup_open');
-    container.addEventListener('keydown', closePopupByEcs);
-    container.addEventListener('mousedown', closePopupByMousedown);
+    document.addEventListener('keydown', closePopupByEcs);
+    document.addEventListener('mousedown', closePopupByMousedown);
+    document.querySelector('.form__submit_elements').classList.add('form__submit_inactive');
+    document.querySelector('.form__submit_elements').disabled = true;
 }
 
 const closePopupByEcs = (evt) => {
     if (evt.key === 'Escape') {
-        const popup = container.querySelector('.popup_open');
+        const popup = document.querySelector('.popup_open');
         popupClose(popup);
     }
-    container.removeEventListener('keydown', closePopupByEcs);
+    document.removeEventListener('keydown', closePopupByEcs);
 }
+
 const closePopupByMousedown = (evt) => {
     if (evt.target.classList.contains('popup_open')) {
-        const popup = container.querySelector('.popup_open')
+        const popup = document.querySelector('.popup_open')
         popupClose(popup);
     }
 };
