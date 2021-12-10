@@ -117,9 +117,10 @@ const popupOpen = (popup) => {
     document.addEventListener('keydown', closePopupByEcs);
     document.addEventListener('mousedown', closePopupByMousedown);
     // if popup has submit button inactive it
-    if (popup.querySelector('.form__submit')) {
-        popup.querySelector('.form__submit').classList.add('form__submit_inactive');
-        popup.querySelector('.form__submit').disabled = true;
+    const formSubmit = popup.querySelector('.form__submit');
+    if (formSubmit) {
+        formSubmit.classList.add('form__submit_inactive');
+        formSubmit.disabled = true;
     }
 }
 
