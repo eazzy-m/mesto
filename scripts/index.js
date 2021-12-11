@@ -103,6 +103,11 @@ addCardForm.addEventListener('submit',  (evt) => {
     addCardFormPlaceName.value = '';
     addCardFormImageSrc.value = '';
     popupClose(popupAddCards);
+    const formSubmit = popupAddCards.querySelector('.form__submit');
+    if (formSubmit) {
+        formSubmit.classList.add('form__submit_inactive');
+        formSubmit.disabled = true;
+    }
 });
 
 const showEditProfileForm = () => {
@@ -116,12 +121,6 @@ const popupOpen = (popup) => {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupByEcs);
     document.addEventListener('mousedown', closePopupByMousedown);
-    // if popup has submit button inactive it
-    const formSubmit = popup.querySelector('.form__submit');
-    if (formSubmit) {
-        formSubmit.classList.add('form__submit_inactive');
-        formSubmit.disabled = true;
-    }
 }
 
 const closePopupByEcs = (evt) => {
@@ -129,7 +128,6 @@ const closePopupByEcs = (evt) => {
         const popup = document.querySelector('.popup_open');
         popupClose(popup);
     }
-    document.removeEventListener('keydown', closePopupByEcs);
 }
 
 const closePopupByMousedown = (evt) => {
@@ -141,6 +139,7 @@ const closePopupByMousedown = (evt) => {
 
 const popupClose = (popup) => {
     popup.classList.remove('popup_open');
+    document.removeEventListener('keydown', closePopupByEcs);
 }
 
 const formSubmitHandler = (evt) => {

@@ -45,13 +45,13 @@ const setEventListeners = (formElement, {inputSelector,
     });
 };
 
-const enableValidation = (config) => {
-    const {formSelector,
-        inputSelector,
-        submitButtonSelector,
-        inactiveButtonClass,
-        inputErrorClass,
-        errorClass} = config;
+const enableValidation = ({formSelector,
+                              inputSelector,
+                              submitButtonSelector,
+                              inactiveButtonClass,
+                              inputErrorClass,
+                              errorClass}) => {
+
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach((formElement) => {
         setEventListeners(formElement, {inputSelector,
