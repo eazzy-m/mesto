@@ -120,7 +120,6 @@ const showEditProfileForm = () => {
 const popupOpen = (popup) => {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupByEcs);
-    document.addEventListener('mousedown', closePopupByMousedown);
 }
 
 const closePopupByEcs = (evt) => {
@@ -140,11 +139,11 @@ const closePopupByMousedown = (evt) => {
 const popupClose = (popup) => {
     popup.classList.remove('popup_open');
     document.removeEventListener('keydown', closePopupByEcs);
+    document.removeEventListener('mousedown', closePopupByMousedown);
 }
 
-const formSubmitHandler = (evt) => {
+const submitProfileInfo = (evt) => {
     evt.preventDefault();
-
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
     popupOpen(popupEditProfile);
@@ -163,7 +162,7 @@ exitProfileButton.addEventListener('click', () => popupClose(popupEditProfile));
 
 exitElementsButton.addEventListener('click',() => popupClose(popupAddCards));
 
-saveButton.addEventListener('submit', formSubmitHandler);
+saveButton.addEventListener('submit', submitProfileInfo);
 
 
 
