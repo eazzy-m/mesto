@@ -120,6 +120,7 @@ const showEditProfileForm = () => {
 const popupOpen = (popup) => {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupByEcs);
+    document.addEventListener('mousedown', closePopupByMousedown);
 }
 
 const closePopupByEcs = (evt) => {
@@ -144,6 +145,7 @@ const popupClose = (popup) => {
 
 const submitProfileInfo = (evt) => {
     evt.preventDefault();
+
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
     popupOpen(popupEditProfile);
