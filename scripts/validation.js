@@ -71,4 +71,8 @@ const validityConfig = {
     errorClass: 'form__input-error_active'
 }
 
+class FormValidator {
+
+}
+
 enableValidation(validityConfig);

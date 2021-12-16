@@ -1,16 +1,12 @@
-
 const editButton = document.querySelector('.edit-button');
 const addButton = document.querySelector('.add-button');
 const exitProfileButton = document.querySelector('.exit-button_popup_profile');
 const exitElementsButton = document.querySelector('.exit-button_popup_elements');
 const exitZoomImageButton = document.querySelector('.exit-button_zoom-image-popup');
 const saveButton = document.querySelector('.edit-profile-form');
-
-
 const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCards = document.querySelector('.popup_elements');
 const popupZoomImage = document.querySelector('.popup_zoom-image');
-
 const name = document.querySelector('#title-input');
 const job = document.querySelector('#subtitle-input');
 const profileTitle = document.querySelector('.profile__info-title');
@@ -18,10 +14,8 @@ const profileSubtitle = document.querySelector('.profile__info-subtitle');
 const addCardForm = document.querySelector('.add-card-form');
 const addCardFormPlaceName = document.querySelector('#place-input');
 const addCardFormImageSrc = document.querySelector('#url-input');
-
 const cardTemplate = document.querySelector('#element-template').content;
 const elements = document.querySelector('.elements');
-
 const figureImg = document.querySelector('.popup__figure-img');
 const figcaption = document.querySelector('.popup__figcaption');
 
@@ -52,7 +46,6 @@ const initialCards = [
     }
 ];
 
-
 const cardsBuilder = (element) => {
     // cards render
     const card = cardTemplate.querySelector('.element').cloneNode(true);
@@ -60,15 +53,18 @@ const cardsBuilder = (element) => {
     card.querySelector('.element__mask-group').alt = element.name;
     card.querySelector('.element__mask-group').src = element.link;
     // hang like/delete/zoom
+
     const likeCard = card.querySelector('.like-button');
     likeCard.addEventListener('click', function (evt) {
         evt.target.classList.toggle('like-button_active');
     })
+
     const deleteCard = card.querySelector('.delete-element-button');
     deleteCard.addEventListener('click' ,function () {
         const element = deleteCard.closest('.element');
         element.remove();
     })
+
     const img = card.querySelector('.element__mask-group');
     img.addEventListener('click', function () {
         popupOpen(popupZoomImage);
@@ -78,14 +74,7 @@ const cardsBuilder = (element) => {
     })
 
     return card;
-}
-
-const showDefaultCards = (card) => {
-    const defaultCards = cardsBuilder(card);
-    elements.append(defaultCards)
-}
-
-initialCards.forEach(showDefaultCards);
+};
 
 const createCard = (evt) => {
     evt.preventDefault();
@@ -95,8 +84,62 @@ const createCard = (evt) => {
     }
     const newCards = cardsBuilder(cardInfo);
     elements.prepend(newCards);
+};
+
+const showEditProfileForm = () => {
+    popupOpen(popupEditProfile);
+    name.value = profileTitle.textContent;
+    job.value = profileSubtitle.textContent;
+};
+
+const popupOpen = (popup) => {
+    popup.classList.add('popup_open');
+    document.addEventListener('keydown', closePopupByEcs);
+    document.addEventListener('mousedown', closePopupByMousedown);
+};
+
+const closePopupByEcs = (evt) => {
+    if (evt.key === 'Escape') {
+        const popup = document.querySelector('.popup_open');
+        popupClose(popup);
+    }
+};
+
+const closePopupByMousedown = (evt) => {
+    if (evt.target.classList.contains('popup_open')) {
+        const popup = document.querySelector('.popup_open')
+        popupClose(popup);
+    }
+};
+
+const popupClose = (popup) => {
+    popup.classList.remove('popup_open');
+    document.removeEventListener('keydown', closePopupByEcs);
+    document.removeEventListener('mousedown', closePopupByMousedown);
+};
+
+const submitProfileInfo = (evt) => {
+    evt.preventDefault();
+    profileTitle.textContent = name.value;
+    profileSubtitle.textContent = job.value;
+    popupOpen(popupEditProfile);
+    name.value = '';
+    job.value = '';
+    popupClose(popupEditProfile);
+};
+
+
+const renderDefaultCards = () => {
+    elements.innerHTML = '';
+    initialCards.forEach((item) => {
+        const card = new Card(item, '#element-template');
+
+        const cardElement = card.generateCard();
+        elements.append(cardElement);
+    })
 }
 
+renderDefaultCards();
 
 addCardForm.addEventListener('submit',  (evt) => {
     createCard(evt)
@@ -110,52 +153,6 @@ addCardForm.addEventListener('submit',  (evt) => {
     }
 });
 
-const showEditProfileForm = () => {
-    popupOpen(popupEditProfile);
-    name.value = profileTitle.textContent;
-    job.value = profileSubtitle.textContent;
-}
-
-
-const popupOpen = (popup) => {
-    popup.classList.add('popup_open');
-    document.addEventListener('keydown', closePopupByEcs);
-    document.addEventListener('mousedown', closePopupByMousedown);
-}
-
-const closePopupByEcs = (evt) => {
-    if (evt.key === 'Escape') {
-        const popup = document.querySelector('.popup_open');
-        popupClose(popup);
-    }
-}
-
-const closePopupByMousedown = (evt) => {
-    if (evt.target.classList.contains('popup_open')) {
-        const popup = document.querySelector('.popup_open')
-        popupClose(popup);
-    }
-};
-
-const popupClose = (popup) => {
-    popup.classList.remove('popup_open');
-    document.removeEventListener('keydown', closePopupByEcs);
-    document.removeEventListener('mousedown', closePopupByMousedown);
-}
-
-const submitProfileInfo = (evt) => {
-    evt.preventDefault();
-
-    profileTitle.textContent = name.value;
-    profileSubtitle.textContent = job.value;
-    popupOpen(popupEditProfile);
-    name.value = '';
-    job.value = '';
-    popupClose(popupEditProfile);
-}
-
-exitZoomImageButton.addEventListener('click', () => popupClose(popupZoomImage));
-
 addButton.addEventListener('click', () => popupOpen(popupAddCards));
 
 editButton.addEventListener('click', showEditProfileForm);
@@ -165,8 +162,5 @@ exitProfileButton.addEventListener('click', () => popupClose(popupEditProfile));
 exitElementsButton.addEventListener('click',() => popupClose(popupAddCards));
 
 saveButton.addEventListener('submit', submitProfileInfo);
-
-
-
 
 
