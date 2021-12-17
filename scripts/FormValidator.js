@@ -20,10 +20,10 @@ class FormValidator {
 
     _checkInputValidity(inputElement) {
         const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-        if (!inputElement.validity.valid) {
-            this._showInputError(inputElement, inputElement.validationMessage, errorElement);
-        } else {
+        if (inputElement.validity.valid) {
             this._hideInputError(inputElement, errorElement);
+        } else {
+            this._showInputError(inputElement, inputElement.validationMessage, errorElement);
         }
     };
 
