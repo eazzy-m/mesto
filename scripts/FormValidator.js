@@ -8,14 +8,14 @@ class FormValidator {
 
     _showInputError(inputElement, validationMessage, errorElement) {
         inputElement.classList.add(this._settings.inputErrorClass);
-        errorElement.textContent = validationMessage;
         errorElement.classList.add(this._settings.errorClass);
+        errorElement.textContent = validationMessage;
     }
 
     _hideInputError(inputElement, errorElement) {
         inputElement.classList.remove(this._settings.inputErrorClass);
-        errorElement.textContent = '';
         errorElement.classList.remove(this._settings.errorClass);
+        errorElement.textContent = '';
     };
 
     _checkInputValidity(inputElement) {
