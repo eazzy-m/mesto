@@ -1,4 +1,5 @@
-
+import {exitZoomImageButton, popupZoomImage, figcaption, figureImg} from "./constants.js"
+import {popupClose} from "./popup.js";
 
 class Card {
     constructor(data, templateSelector) {
@@ -76,3 +77,5 @@ class Card {
     }
 
 }
+
+export {Card}

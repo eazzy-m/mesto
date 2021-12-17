@@ -1,23 +1,11 @@
-const editButton = document.querySelector('.edit-button');
-const addButton = document.querySelector('.add-button');
-const exitProfileButton = document.querySelector('.exit-button_popup_profile');
-const exitElementsButton = document.querySelector('.exit-button_popup_elements');
-const exitZoomImageButton = document.querySelector('.exit-button_zoom-image-popup');
-const saveButton = document.querySelector('.edit-profile-form');
-const popupEditProfile = document.querySelector('.popup_profile');
-const popupAddCards = document.querySelector('.popup_elements');
-const popupZoomImage = document.querySelector('.popup_zoom-image');
-const name = document.querySelector('#title-input');
-const job = document.querySelector('#subtitle-input');
-const profileTitle = document.querySelector('.profile__info-title');
-const profileSubtitle = document.querySelector('.profile__info-subtitle');
-const addCardForm = document.querySelector('.add-card-form');
-const addCardFormPlaceName = document.querySelector('#place-input');
-const addCardFormImageSrc = document.querySelector('#url-input');
-const cardTemplate = document.querySelector('#element-template').content;
-const elements = document.querySelector('.elements');
-const figureImg = document.querySelector('.popup__figure-img');
-const figcaption = document.querySelector('.popup__figcaption');
+import {FormValidator} from "./FormValidator.js";
+import {Card} from "./Card.js";
+import {popupOpen, popupClose} from "./popup.js"
+import {validityConfig} from "./config.js";
+import {cardTemplate, popupEditProfile, profileSubtitle, figcaption, figureImg, popupZoomImage,
+    exitZoomImageButton, editButton, elements, name, exitElementsButton, addButton, saveButton,
+    openFormButtonsList, job, formsList, profileTitle, addCardForm, addCardFormImageSrc,
+    addCardFormPlaceName, popupAddCards, exitProfileButton} from "./constants.js"
 
 const initialCards = [
     {
@@ -82,40 +70,15 @@ const createCard = (evt) => {
         name: addCardFormPlaceName.value,
         link: addCardFormImageSrc.value,
     }
-    const newCards = cardsBuilder(cardInfo);
-    elements.prepend(newCards);
+    const card = new Card(cardInfo, '#element-template');
+    const cardElement = card.generateCard();
+    elements.prepend(cardElement);
 };
 
 const showEditProfileForm = () => {
     popupOpen(popupEditProfile);
     name.value = profileTitle.textContent;
     job.value = profileSubtitle.textContent;
-};
-
-const popupOpen = (popup) => {
-    popup.classList.add('popup_open');
-    document.addEventListener('keydown', closePopupByEcs);
-    document.addEventListener('mousedown', closePopupByMousedown);
-};
-
-const closePopupByEcs = (evt) => {
-    if (evt.key === 'Escape') {
-        const popup = document.querySelector('.popup_open');
-        popupClose(popup);
-    }
-};
-
-const closePopupByMousedown = (evt) => {
-    if (evt.target.classList.contains('popup_open')) {
-        const popup = document.querySelector('.popup_open')
-        popupClose(popup);
-    }
-};
-
-const popupClose = (popup) => {
-    popup.classList.remove('popup_open');
-    document.removeEventListener('keydown', closePopupByEcs);
-    document.removeEventListener('mousedown', closePopupByMousedown);
 };
 
 const submitProfileInfo = (evt) => {
@@ -128,12 +91,10 @@ const submitProfileInfo = (evt) => {
     popupClose(popupEditProfile);
 };
 
-
 const renderDefaultCards = () => {
     elements.innerHTML = '';
     initialCards.forEach((item) => {
         const card = new Card(item, '#element-template');
-
         const cardElement = card.generateCard();
         elements.append(cardElement);
     })
@@ -153,6 +114,15 @@ addCardForm.addEventListener('submit',  (evt) => {
     }
 });
 
+const setFormValidation = (formElement) => {
+    const formValidator = new FormValidator(formElement, openFormButtonsList, validityConfig);
+    formValidator.enableValidation();
+}
+
+formsList.forEach(form => {
+    setFormValidation(form);
+})
+
 addButton.addEventListener('click', () => popupOpen(popupAddCards));
 
 editButton.addEventListener('click', showEditProfileForm);
@@ -160,6 +130,8 @@ editButton.addEventListener('click', showEditProfileForm);
 exitProfileButton.addEventListener('click', () => popupClose(popupEditProfile));
 
 exitElementsButton.addEventListener('click',() => popupClose(popupAddCards));
+
+exitZoomImageButton.addEventListener('click',() => popupClose(popupAddCards));
 
 saveButton.addEventListener('submit', submitProfileInfo);
 
