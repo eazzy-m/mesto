@@ -2,10 +2,9 @@ import {FormValidator} from "./FormValidator.js";
 import {Card} from "./Card.js";
 import {popupOpen, popupClose} from "./popup.js"
 import {validityConfig} from "./config.js";
-import {cardTemplate, popupEditProfile, profileSubtitle, figcaption, figureImg, popupZoomImage,
-    exitZoomImageButton, editButton, elements, name, exitElementsButton, addButton, saveButton,
-    openFormButtonsList, job, formsList, profileTitle, addCardForm, addCardFormImageSrc,
-    addCardFormPlaceName, popupAddCards, exitProfileButton} from "./constants.js"
+import {popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
+    exitElementsButton, addButton, saveButton, openFormButtonsList, formsList, profileTitle, addCardForm,
+    addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton} from "./constants.js"
 
 const initialCards = [
     {
@@ -33,36 +32,6 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
-const cardsBuilder = (element) => {
-    // cards render
-    const card = cardTemplate.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__text').textContent = element.name;
-    card.querySelector('.element__mask-group').alt = element.name;
-    card.querySelector('.element__mask-group').src = element.link;
-    // hang like/delete/zoom
-
-    const likeCard = card.querySelector('.like-button');
-    likeCard.addEventListener('click', function (evt) {
-        evt.target.classList.toggle('like-button_active');
-    })
-
-    const deleteCard = card.querySelector('.delete-element-button');
-    deleteCard.addEventListener('click' ,function () {
-        const element = deleteCard.closest('.element');
-        element.remove();
-    })
-
-    const img = card.querySelector('.element__mask-group');
-    img.addEventListener('click', function () {
-        popupOpen(popupZoomImage);
-        figureImg.src = img.src;
-        figureImg.alt = img.alt;
-        figcaption.textContent = img.alt;
-    })
-
-    return card;
-};
 
 const createCard = (evt) => {
     evt.preventDefault();
