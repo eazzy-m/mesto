@@ -4,13 +4,13 @@ class FormValidator {
         this._formElement = formElement;
         this._settings = settings;
         this._openFormButtons = openFormButtons;
-    }
+    };
 
     _showInputError(inputElement, validationMessage, errorElement) {
         inputElement.classList.add(this._settings.inputErrorClass);
         errorElement.classList.add(this._settings.errorClass);
         errorElement.textContent = validationMessage;
-    }
+    };
 
     _hideInputError(inputElement, errorElement) {
         inputElement.classList.remove(this._settings.inputErrorClass);
@@ -24,8 +24,7 @@ class FormValidator {
             this._hideInputError(inputElement, errorElement);
         } else {
             this._showInputError(inputElement, inputElement.validationMessage, errorElement);
-        }
-    };
+        }};
 
     _toggleButtonState() {
         const isFormValid = this._formElement.checkValidity();
@@ -75,4 +74,4 @@ class FormValidator {
     };
 }
 
-export {FormValidator};
+export { FormValidator };

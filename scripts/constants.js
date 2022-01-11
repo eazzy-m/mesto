@@ -1,3 +1,4 @@
+
 export const editButton = document.querySelector('.edit-button');
 export const addButton = document.querySelector('.add-button');
 export const exitProfileButton = document.querySelector('.exit-button_popup_profile');
@@ -12,11 +13,9 @@ export const profileSubtitle = document.querySelector('.profile__info-subtitle')
 export const addCardForm = document.querySelector('.add-card-form');
 export const addCardFormPlaceName = document.querySelector('#place-input');
 export const addCardFormImageSrc = document.querySelector('#url-input');
-export const cardTemplate = document.querySelector('#element-template').content;
 export const elements = document.querySelector('.elements');
 export const formsList = Array.from(document.forms);
 export const openFormButtonsList = Array.from(document.querySelectorAll('.button-open-form'));
-
 export const exitZoomImageButton = document.querySelector('.exit-button_zoom-image-popup');
 export const popupZoomImage = document.querySelector('.popup_zoom-image');
 export const figureImg = document.querySelector('.popup__figure-img');

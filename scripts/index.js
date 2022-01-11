@@ -2,9 +2,11 @@ import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { popupOpen, popupClose } from "./popup.js"
 import { validityConfig } from "./config.js";
-import { popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
+import {
+    popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
     exitElementsButton, addButton, saveButton, openFormButtonsList, formsList, profileTitle, addCardForm,
-    addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton, initialCards } from "./constants.js"
+    addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton, initialCards, popupZoomImage
+} from "./constants.js"
 
 const createCard = (evt) => {
     evt.preventDefault();
@@ -38,12 +40,12 @@ const renderDefaultCards = () => {
         const card = new Card(item, '#element-template');
         const cardElement = card.generateCard();
         elements.append(cardElement);
-    })
-}
+    });
+};
 
 renderDefaultCards();
 
-addCardForm.addEventListener('submit',  (evt) => {
+addCardForm.addEventListener('submit',(evt) => {
     createCard(evt)
     addCardFormPlaceName.value = '';
     addCardFormImageSrc.value = '';
@@ -72,6 +74,6 @@ exitProfileButton.addEventListener('click', () => popupClose(popupEditProfile));
 
 exitElementsButton.addEventListener('click',() => popupClose(popupAddCards));
 
-exitZoomImageButton.addEventListener('click',() => popupClose(popupAddCards));
+exitZoomImageButton.addEventListener('click',() => popupClose(popupZoomImage));
 
 saveButton.addEventListener('submit', submitProfileInfo);

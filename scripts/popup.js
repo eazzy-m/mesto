@@ -24,4 +24,4 @@ const popupClose = (popup) => {
     document.removeEventListener('mousedown', popupCloseByMousedown);
 };
 
-export {popupOpen, popupClose}
+export { popupOpen, popupClose }
