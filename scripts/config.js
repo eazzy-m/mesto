@@ -8,4 +8,4 @@ const validityConfig = {
     errorClass: 'form__input-error_active'
 }
 
-export {validityConfig}
+export { validityConfig }

@@ -1,37 +1,10 @@
-import {FormValidator} from "./FormValidator.js";
-import {Card} from "./Card.js";
-import {popupOpen, popupClose} from "./popup.js"
-import {validityConfig} from "./config.js";
-import {popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
+import { FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+import { popupOpen, popupClose } from "./popup.js"
+import { validityConfig } from "./config.js";
+import { popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
     exitElementsButton, addButton, saveButton, openFormButtonsList, formsList, profileTitle, addCardForm,
-    addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton} from "./constants.js"
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+    addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton, initialCards } from "./constants.js"
 
 const createCard = (evt) => {
     evt.preventDefault();
@@ -55,8 +28,7 @@ const submitProfileInfo = (evt) => {
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
     popupOpen(popupEditProfile);
-    name.value = '';
-    job.value = '';
+    saveButton.reset()
     popupClose(popupEditProfile);
 };
 
@@ -103,5 +75,3 @@ exitElementsButton.addEventListener('click',() => popupClose(popupAddCards));
 exitZoomImageButton.addEventListener('click',() => popupClose(popupAddCards));
 
 saveButton.addEventListener('submit', submitProfileInfo);
-
-
