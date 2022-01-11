@@ -4,6 +4,7 @@ class FormValidator {
         this._formElement = formElement;
         this._settings = settings;
         this._openFormButtons = openFormButtons;
+        this._inputsList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     };
 
     _showInputError(inputElement, validationMessage, errorElement) {
@@ -32,18 +33,16 @@ class FormValidator {
             this._formSubmitButton.classList.toggle(this._settings.inactiveButtonClass, !isFormValid);
     };
 
-    _inputEventListener(evt) {
-        const inputElement = evt.target;
+    _inputEventListener(inputElement) {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
     };
 
-    _hideErrorMessages() {
-        this._inputsList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+    hideErrorMessages() {
         this._inputsList.forEach(element => {
             element.classList.remove(this._settings.inputErrorClass);
         });
-        this._errorsList = Array.from(this._formElement.querySelectorAll(`.${this._settings.inputSelector}-error`));
+        this._errorsList = Array.from(this._formElement.querySelectorAll(`${this._settings.inputSelector}-error`));
         this._errorsList.forEach(element => {
             element.textContent = '';
             element.classList.remove(this._settings.errorClass);
@@ -51,10 +50,9 @@ class FormValidator {
     };
 
     _setEventListeners() {
-        this._formElement.addEventListener('reset', () => {
-            this._hideErrorMessages();
-        });
-        this._formInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+        // this._formElement.addEventListener('reset', () => {
+        //     this.hideErrorMessages();
+        // });
         this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
         this._openFormButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -62,9 +60,10 @@ class FormValidator {
             });
         });
         this._toggleButtonState();
-        this._formInputs.forEach(inputElement => {
-            inputElement.addEventListener('input', (evt) => {
-                this._inputEventListener(evt);
+
+        this._inputsList.forEach(inputElement => {
+            inputElement.addEventListener('input', () => {
+                this._inputEventListener(inputElement);
             });
         });
     };
