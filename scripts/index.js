@@ -54,7 +54,7 @@ addButton.addEventListener('click',() => {
     addCardForm.reset();
     addNewCardForm.toggleButton();
     addNewCardForm.hideErrorMessages();
-    popupOpen(popupAddCards)
+    popupOpen(popupAddCards);
 });
 
 editButton.addEventListener('click', () => {

@@ -13,7 +13,7 @@ const popupCloseByEcs = (evt) => {
 
 const popupCloseByMousedown = (evt) => {
     if (evt.target.classList.contains('popup_open')) {
-        const popup = document.querySelector('.popup_open')
+        const popup = document.querySelector('.popup_open');
         popupClose(popup);
     }
 };
@@ -24,4 +24,4 @@ const popupClose = (popup) => {
     document.removeEventListener('mousedown', popupCloseByMousedown);
 };
 
-export { popupOpen, popupClose }
+export { popupOpen, popupClose };

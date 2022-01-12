@@ -26,7 +26,8 @@ class FormValidator {
             this._hideInputError(inputElement);
         } else {
             this._showInputError(inputElement, inputElement.validationMessage);
-        }};
+        }
+    };
 
     _toggleButtonState() {
         this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
