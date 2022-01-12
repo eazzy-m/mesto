@@ -52,4 +52,4 @@ class Card {
     };
 }
 
-export {Card};
+export { Card };
