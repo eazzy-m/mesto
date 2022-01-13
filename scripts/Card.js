@@ -1,5 +1,5 @@
 import { popupZoomImage, figcaption, figureImg } from "./constants.js";
-import { popupOpen } from "./popup.js";
+import { popupOpening } from "./popup.js";
 
 class Card {
     constructor(data, templateSelector) {
@@ -17,10 +17,10 @@ class Card {
     };
 
     _handleOpenZoomPopup() {
-        popupOpen(popupZoomImage)
         figureImg.src = this._link;
         figureImg.alt = this._name;
         figcaption.textContent = this._name;
+        popupOpening(popupZoomImage)
     };
 
     _setEventListeners(elementsImage) {
@@ -29,12 +29,12 @@ class Card {
         });
 
         const likeCard = this._element.querySelector('.like-button');
-        likeCard.addEventListener('click', () => {
+        likeCard.addEventListener('click',() => {
             likeCard.classList.toggle('like-button_active');
         });
 
         const deleteCardButton = this._element.querySelector('.delete-element-button');
-        deleteCardButton.addEventListener('click', () => {
+        deleteCardButton.addEventListener('click',() => {
             this._element.remove();
             this._element = null;
         });

@@ -1,6 +1,6 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
-import { popupOpen, popupClose } from "./popup.js"
+import { popupOpening, popupClosing } from "./popup.js"
 import { validityConfig } from "./config.js";
 import {
     popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
@@ -15,12 +15,12 @@ const addNewCardForm = new FormValidator(addCardForm, openFormButtonsList, valid
 addNewCardForm.enableValidation();
 
 const createCard = (card) => {
-    const newCard = new Card(card, '#element-template');
+    const newCard = new Card(card,'#element-template');
     return newCard.generateCard();
 };
 
 const renderDefaultCards = () => {
-    elements.innerHTML = '';
+
     initialCards.forEach((item) => {
         const newCard = createCard(item);
         elements.append(newCard);
@@ -33,9 +33,8 @@ const submitProfileInfo = (evt) => {
     evt.preventDefault();
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
-    popupOpen(popupEditProfile);
     formEditProfile.reset();
-    popupClose(popupEditProfile);
+    popupClosing(popupEditProfile);
 };
 
 const submitAddCardForm = (evt) => {
@@ -47,28 +46,27 @@ const submitAddCardForm = (evt) => {
     const newCard = createCard(cardInfo);
     elements.prepend(newCard);
     addCardForm.reset();
-    popupClose(popupAddCards);
+    popupClosing(popupAddCards);
 };
 
 addButton.addEventListener('click',() => {
-    addCardForm.reset();
-    addNewCardForm.toggleButton();
+    addNewCardForm.toggleButtonState();
     addNewCardForm.hideErrorMessages();
-    popupOpen(popupAddCards);
+    popupOpening(popupAddCards);
 });
 
-editButton.addEventListener('click', () => {
+editButton.addEventListener('click',() => {
     editProfileForm.hideErrorMessages();
     name.value = profileTitle.textContent;
     job.value = profileSubtitle.textContent;
-    popupOpen(popupEditProfile);
+    popupOpening(popupEditProfile);
 });
 
-exitProfileButton.addEventListener('click',() => popupClose(popupEditProfile));
+exitProfileButton.addEventListener('click',() => popupClosing(popupEditProfile));
 
-exitElementsButton.addEventListener('click',() => popupClose(popupAddCards));
+exitElementsButton.addEventListener('click',() => popupClosing(popupAddCards));
 
-exitZoomImageButton.addEventListener('click',() => popupClose(popupZoomImage));
+exitZoomImageButton.addEventListener('click',() => popupClosing(popupZoomImage));
 
 addCardForm.addEventListener('submit', submitAddCardForm);
 
