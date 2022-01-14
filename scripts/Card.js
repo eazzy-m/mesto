@@ -1,5 +1,5 @@
 import { popupZoomImage, figcaption, figureImg } from "./constants.js";
-import { popupOpening } from "./popup.js";
+import { openPopup } from "./popup.js";
 
 class Card {
     constructor(data, templateSelector) {
@@ -20,7 +20,7 @@ class Card {
         figureImg.src = this._link;
         figureImg.alt = this._name;
         figcaption.textContent = this._name;
-        popupOpening(popupZoomImage)
+        openPopup(popupZoomImage)
     };
 
     _setEventListeners(elementsImage) {

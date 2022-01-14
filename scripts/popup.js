@@ -1,27 +1,27 @@
-const popupOpening = (popup) => {
+const openPopup = (popup) => {
     popup.classList.add('popup_open');
-    document.addEventListener('keydown', popupClosingByEcs);
-    document.addEventListener('mousedown', popupClosingByMousedown);
+    document.addEventListener('keydown', closePopupByEcs);
+    document.addEventListener('mousedown', closePopupByMousedown);
 };
 
-const popupClosingByEcs = (evt) => {
+const closePopupByEcs = (evt) => {
     if (evt.key === 'Escape') {
         const popup = document.querySelector('.popup_open');
-        popupClosing(popup);
+        closePopup(popup);
     }
 };
 
-const popupClosingByMousedown = (evt) => {
+const closePopupByMousedown = (evt) => {
     if (evt.target.classList.contains('popup_open')) {
         const popup = document.querySelector('.popup_open');
-        popupClosing(popup);
+        closePopup(popup);
     }
 };
 
-const popupClosing = (popup) => {
+const closePopup = (popup) => {
     popup.classList.remove('popup_open');
-    document.removeEventListener('keydown', popupClosingByEcs);
-    document.removeEventListener('mousedown', popupClosingByMousedown);
+    document.removeEventListener('keydown', closePopupByEcs);
+    document.removeEventListener('mousedown', closePopupByMousedown);
 };
 
-export { popupOpening, popupClosing };
+export { openPopup, closePopup };

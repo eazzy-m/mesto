@@ -1,18 +1,19 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
-import { popupOpening, popupClosing } from "./popup.js"
+import { openPopup, closePopup } from "./popup.js"
 import { validityConfig } from "./config.js";
 import {
     popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
-    exitElementsButton, addButton, formEditProfile, openFormButtonsList, profileTitle, addCardForm,
+    exitElementsButton, addButton, formEditProfile, profileTitle, addCardForm,
     addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton, initialCards, popupZoomImage
 } from "./constants.js";
 
-const editProfileForm = new FormValidator(formEditProfile, openFormButtonsList, validityConfig);
+const editProfileForm = new FormValidator(formEditProfile, validityConfig);
 editProfileForm.enableValidation();
 
-const addNewCardForm = new FormValidator(addCardForm, openFormButtonsList, validityConfig);
+const addNewCardForm = new FormValidator(addCardForm, validityConfig);
 addNewCardForm.enableValidation();
+addNewCardForm.toggleButtonState();
 
 const createCard = (card) => {
     const newCard = new Card(card,'#element-template');
@@ -20,7 +21,6 @@ const createCard = (card) => {
 };
 
 const renderDefaultCards = () => {
-
     initialCards.forEach((item) => {
         const newCard = createCard(item);
         elements.append(newCard);
@@ -34,7 +34,7 @@ const submitProfileInfo = (evt) => {
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
     formEditProfile.reset();
-    popupClosing(popupEditProfile);
+    closePopup(popupEditProfile);
 };
 
 const submitAddCardForm = (evt) => {
@@ -46,27 +46,27 @@ const submitAddCardForm = (evt) => {
     const newCard = createCard(cardInfo);
     elements.prepend(newCard);
     addCardForm.reset();
-    popupClosing(popupAddCards);
+    addNewCardForm.toggleButtonState();
+    closePopup(popupAddCards);
 };
 
 addButton.addEventListener('click',() => {
-    addNewCardForm.toggleButtonState();
     addNewCardForm.hideErrorMessages();
-    popupOpening(popupAddCards);
+    openPopup(popupAddCards);
 });
 
 editButton.addEventListener('click',() => {
     editProfileForm.hideErrorMessages();
     name.value = profileTitle.textContent;
     job.value = profileSubtitle.textContent;
-    popupOpening(popupEditProfile);
+    openPopup(popupEditProfile);
 });
 
-exitProfileButton.addEventListener('click',() => popupClosing(popupEditProfile));
+exitProfileButton.addEventListener('click',() => closePopup(popupEditProfile));
 
-exitElementsButton.addEventListener('click',() => popupClosing(popupAddCards));
+exitElementsButton.addEventListener('click',() => closePopup(popupAddCards));
 
-exitZoomImageButton.addEventListener('click',() => popupClosing(popupZoomImage));
+exitZoomImageButton.addEventListener('click',() => closePopup(popupZoomImage));
 
 addCardForm.addEventListener('submit', submitAddCardForm);
 

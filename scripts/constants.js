@@ -14,9 +14,6 @@ export const addCardForm = document.querySelector('.add-card-form');
 export const addCardFormPlaceName = document.querySelector('#place-input');
 export const addCardFormImageSrc = document.querySelector('#url-input');
 export const elements = document.querySelector('.elements');
-
-export const openFormButtonsList = Array.from(document.querySelectorAll('.button-open-form')); //
-
 export const exitZoomImageButton = document.querySelector('.exit-button_zoom-image-popup');
 export const popupZoomImage = document.querySelector('.popup_zoom-image');
 export const figureImg = document.querySelector('.popup__figure-img');
