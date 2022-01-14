@@ -29,9 +29,7 @@ class Card {
         });
 
         const likeCard = this._element.querySelector('.like-button');
-        likeCard.addEventListener('click',() => {
-            likeCard.classList.toggle('like-button_active');
-        });
+        likeCard.addEventListener('click',() => likeCard.classList.toggle('like-button_active'));
 
         const deleteCardButton = this._element.querySelector('.delete-element-button');
         deleteCardButton.addEventListener('click',() => {

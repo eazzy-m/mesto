@@ -21,14 +21,10 @@ class FormValidator {
     };
 
     _checkInputValidity(inputElement) {
-        if (inputElement.validity.valid) {
-            this._hideInputError(inputElement);
-        } else {
-            this._showInputError(inputElement, inputElement.validationMessage);
-        }
-    };
+        inputElement.validity.valid ? this._hideInputError(inputElement) : this._showInputError(inputElement, inputElement.validationMessage);
+        };
 
-    _setEventListeners() {
+    enableValidation() {
         this._inputsList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
@@ -50,9 +46,6 @@ class FormValidator {
         });
     };
 
-    enableValidation() {
-        this._setEventListeners();
-    };
 }
 
 export { FormValidator };

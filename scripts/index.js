@@ -15,7 +15,7 @@ const addNewCardForm = new FormValidator(addCardForm, validityConfig);
 addNewCardForm.enableValidation();
 addNewCardForm.toggleButtonState();
 
-const createCard = (card) => {
+const createCard = card => {
     const newCard = new Card(card,'#element-template');
     return newCard.generateCard();
 };
@@ -29,7 +29,7 @@ const renderDefaultCards = () => {
 
 renderDefaultCards();
 
-const submitProfileInfo = (evt) => {
+const submitProfileInfo = evt => {
     evt.preventDefault();
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
@@ -37,7 +37,7 @@ const submitProfileInfo = (evt) => {
     closePopup(popupEditProfile);
 };
 
-const submitAddCardForm = (evt) => {
+const submitAddCardForm = evt => {
     evt.preventDefault();
     const cardInfo = {
         name: addCardFormPlaceName.value,
