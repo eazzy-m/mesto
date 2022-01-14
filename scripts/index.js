@@ -21,7 +21,7 @@ const createCard = card => {
 };
 
 const renderDefaultCards = () => {
-    initialCards.forEach((item) => {
+    initialCards.forEach(item => {
         const newCard = createCard(item);
         elements.append(newCard);
     });
