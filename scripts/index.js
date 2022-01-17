@@ -59,6 +59,7 @@ editButton.addEventListener('click',() => {
     editProfileForm.hideErrorMessages();
     name.value = profileTitle.textContent;
     job.value = profileSubtitle.textContent;
+    editProfileForm.toggleButtonState();
     openPopup(popupEditProfile);
 });
 
