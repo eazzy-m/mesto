@@ -29,16 +29,16 @@ const renderDefaultCards = () => {
 
 renderDefaultCards();
 
-const submitProfileInfo = evt => {
-    evt.preventDefault();
+const submitProfileInfo = e => {
+    e.preventDefault();
     profileTitle.textContent = name.value;
     profileSubtitle.textContent = job.value;
     formEditProfile.reset();
     closePopup(popupEditProfile);
 };
 
-const submitAddCardForm = evt => {
-    evt.preventDefault();
+const submitAddCardForm = e => {
+    e.preventDefault();
     const cardInfo = {
         name: addCardFormPlaceName.value,
         link: addCardFormImageSrc.value,
@@ -56,9 +56,9 @@ addButton.addEventListener('click',() => {
 });
 
 editButton.addEventListener('click',() => {
-    editProfileForm.hideErrorMessages();
     name.value = profileTitle.textContent;
     job.value = profileSubtitle.textContent;
+    editProfileForm.hideErrorMessages();
     editProfileForm.toggleButtonState();
     openPopup(popupEditProfile);
 });
