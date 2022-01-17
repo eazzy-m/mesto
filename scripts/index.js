@@ -20,14 +20,10 @@ const createCard = card => {
     return newCard.generateCard();
 };
 
-const renderDefaultCards = () => {
-    initialCards.forEach(item => {
-        const newCard = createCard(item);
-        elements.append(newCard);
-    });
-};
-
-renderDefaultCards();
+initialCards.forEach(item => {
+    const newCard = createCard(item);
+    elements.append(newCard);
+});
 
 const submitProfileInfo = e => {
     e.preventDefault();
