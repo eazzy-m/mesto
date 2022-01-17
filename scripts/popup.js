@@ -4,15 +4,15 @@ const openPopup = popup => {
     document.addEventListener('mousedown', closePopupByMousedown);
 };
 
-const closePopupByEcs = evt => {
-    if (evt.key === 'Escape') {
+const closePopupByEcs = e => {
+    if (e.key === 'Escape') {
         const popup = document.querySelector('.popup_open');
         closePopup(popup);
     }
 };
 
-const closePopupByMousedown = evt => {
-    if (evt.target.classList.contains('popup_open')) {
+const closePopupByMousedown = e => {
+    if (e.target.classList.contains('popup_open')) {
         const popup = document.querySelector('.popup_open');
         closePopup(popup);
     }
