@@ -1,5 +1,5 @@
-import { popupZoomImage, figcaption, figureImg } from "./constants.js";
-import { openPopup } from "./popup.js";
+import { popupZoomImage, figcaption, figureImg } from "../utils/constants.js";
+import { openPopup } from "../utils/popup.js";
 
 class Card {
     constructor(data, templateSelector) {

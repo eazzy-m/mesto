@@ -1,12 +1,13 @@
-import { FormValidator } from "./FormValidator.js";
-import { Card } from "./Card.js";
-import { openPopup, closePopup } from "./popup.js"
-import { validityConfig } from "./config.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Card } from "../components/Card.js";
+import { Section } from "../components/Section.js";
+import { openPopup, closePopup } from "../utils/popup.js"
+import { validityConfig } from "../utils/config.js";
 import {
     popupEditProfile, profileSubtitle, exitZoomImageButton, editButton, elements, name, job,
     exitElementsButton, addButton, formEditProfile, profileTitle, addCardForm,
     addCardFormImageSrc, addCardFormPlaceName, popupAddCards, exitProfileButton, initialCards, popupZoomImage
-} from "./constants.js";
+} from "../utils/constants.js";
 
 const editProfileForm = new FormValidator(formEditProfile, validityConfig);
 editProfileForm.enableValidation();
@@ -20,10 +21,19 @@ const createCard = card => {
     return newCard.generateCard();
 };
 
-initialCards.forEach(item => {
-    const newCard = createCard(item);
-    elements.append(newCard);
-});
+const cardList = new Section({items: initialCards, renderer: (cardItem) => {
+        const element = new Card(cardItem, '#element-template');
+        const cardElement = element.generateCard();
+
+        cardList.addItem(cardElement);
+    }}, '.elements');
+
+cardList.renderItems();
+
+// initialCards.forEach(item => {
+//     const newCard = createCard(item);
+//     elements.append(newCard);
+// });
 
 const submitProfileInfo = e => {
     e.preventDefault();
