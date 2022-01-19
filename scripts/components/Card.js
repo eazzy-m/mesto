@@ -1,11 +1,10 @@
-import { popupZoomImage, figcaption, figureImg } from "../utils/constants.js";
-import { openPopup } from "../utils/popup.js";
 
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, { handleCardClick }) {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     };
 
     _getTemplate() {
@@ -16,16 +15,9 @@ class Card {
             .cloneNode(true);
     };
 
-    _handleOpenZoomPopup() {
-        figureImg.src = this._link;
-        figureImg.alt = this._name;
-        figcaption.textContent = this._name;
-        openPopup(popupZoomImage)
-    };
-
     _setEventListeners(elementsImage) {
         elementsImage.addEventListener('click', () => {
-            this._handleOpenZoomPopup();
+            this._handleCardClick({name : elementsImage.name, link: elementsImage.src});
         });
 
         const likeCard = this._element.querySelector('.like-button');

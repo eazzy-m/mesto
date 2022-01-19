@@ -7,14 +7,14 @@ class FormValidator {
     };
 
     _showInputError(inputElement, validationMessage) {
-        const errorElement = this._formElement.querySelector(`.${inputElement.id}` + '-error');
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.add(this._settings.inputErrorClass);
         errorElement.classList.add(this._settings.errorClass);
         errorElement.textContent = validationMessage;
     };
 
     _hideInputError(inputElement) {
-        const errorElement = this._formElement.querySelector(`.${inputElement.id}` + '-error');
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
         inputElement.classList.remove(this._settings.inputErrorClass);
         errorElement.classList.remove(this._settings.errorClass);
         errorElement.textContent = '';
@@ -41,11 +41,8 @@ class FormValidator {
     };
 
     hideErrorMessages() {
-        this._inputsList.forEach(element => {
-            this._hideInputError(element);
-        });
+        this._inputsList.forEach(element => this._hideInputError(element));
     };
-
 }
 
 export { FormValidator };

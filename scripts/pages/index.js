@@ -1,7 +1,11 @@
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
-import {  Popup } from "../utils/popup.js"
+import { Popup } from "../components/Popup.js"
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
+
 import { validityConfig } from "../utils/config.js";
 import { profileSubtitle, editButton, elements, name, job, addButton, formEditProfile,
     profileTitle, addCardForm, addCardFormImageSrc, addCardFormPlaceName, initialCards, } from "../utils/constants.js";
@@ -13,13 +17,21 @@ const addNewCardForm = new FormValidator(addCardForm, validityConfig);
 addNewCardForm.enableValidation();
 addNewCardForm.toggleButtonState();
 
-const createCard = card => {
-    const newCard = new Card(card,'#element-template');
-    return newCard.generateCard();
-};
+const profileData = new UserInfo({userName: '.profile__info-title', userOccupation: '.profile__info-subtitle'})
 
-const cardList = new Section({items: initialCards, renderer: (cardItem) => {
-        const element = new Card(cardItem, '#element-template');
+const profilePopup = new PopupWithForm('.popup_profile', (item) => {
+    profileData.setUserInfo(item);
+});
+profilePopup.setEventListeners();
+
+const addCardPopup = new Popup('.popup_elements');
+addCardPopup.setEventListeners();
+
+const zoomCardPopup = new PopupWithImage('.popup_zoom-image');
+zoomCardPopup.setEventListeners();
+
+const cardList = new Section({ items: initialCards, renderer: (cardItem) => {
+        const element = new Card(cardItem, '#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
         const cardElement = element.generateCard();
 
         cardList.addItem(cardElement);
@@ -27,31 +39,12 @@ const cardList = new Section({items: initialCards, renderer: (cardItem) => {
 
 cardList.renderItems();
 
-// initialCards.forEach(item => {
-//     const newCard = createCard(item);
-//     elements.append(newCard);
-// });
-
-const submitProfileInfo = e => {
-    e.preventDefault();
-    profileTitle.textContent = name.value;
-    profileSubtitle.textContent = job.value;
-    formEditProfile.reset();
-    profilePopup.closePopup();
-   // closePopup(popupEditProfile);
+const createCard = card => {
+    const newCard = new Card(card,'#element-template', {handleCardClick: (card) => {
+        zoomCardPopup.openPopup(card);
+    }});
+    return newCard.generateCard();
 };
-
-const profilePopup = new Popup('.popup_profile');
-
-profilePopup.setEventListeners();
-
-const addCardPopup = new Popup('.popup_elements');
-
-addCardPopup.setEventListeners();
-
-const zoomCardPopup = new Popup('.popup_zoom-image');
-
-zoomCardPopup.setEventListeners();
 
 const submitAddCardForm = e => {
     e.preventDefault();
@@ -64,30 +57,21 @@ const submitAddCardForm = e => {
     addCardForm.reset();
     addNewCardForm.toggleButtonState();
     addCardPopup.closePopup();
-   // closePopup(popupAddCards);
 };
 
 addButton.addEventListener('click',() => {
     addNewCardForm.hideErrorMessages();
     addCardPopup.openPopup();
-    //openPopup(popupAddCards);
 });
 
 editButton.addEventListener('click',() => {
-    name.value = profileTitle.textContent;
-    job.value = profileSubtitle.textContent;
+    profileData.getUserInfo()
+    console.log(profileData.getUserInfo())
+    name.value = profileData.getUserInfo().profile_info_title;
+    job.value = profileData.getUserInfo().profile_info_subtitle;
     editProfileForm.hideErrorMessages();
     editProfileForm.toggleButtonState();
     profilePopup.openPopup();
-    //openPopup(popupEditProfile);
 });
 
-// exitProfileButton.addEventListener('click',() => closePopup(popupEditProfile));
-//
-// exitElementsButton.addEventListener('click',() => closePopup(popupAddCards));
-//
-// exitZoomImageButton.addEventListener('click',() => closePopup(popupZoomImage));
-
 addCardForm.addEventListener('submit', submitAddCardForm);
-
-formEditProfile.addEventListener('submit', submitProfileInfo);
