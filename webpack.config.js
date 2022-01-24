@@ -50,7 +50,7 @@ module.exports = {
         ],
     },
     plugins: [
-        new HtmlWebPackPlugin({template: './index.html'}),
+        new HtmlWebPackPlugin({template: './src/index.html'}),
         new MiniCssExtractPlugin()
     ]
 }
