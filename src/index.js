@@ -18,18 +18,16 @@ addNewCardForm.toggleButtonState();
 
 const profileData = new UserInfo({userName: '.profile__info-title', userOccupation: '.profile__info-subtitle'})
 
-const profilePopup = new PopupWithForm('.popup_profile',item => {
-    profileData.setUserInfo(item)
-    profilePopup.closePopup();
-});
+const profilePopup = new PopupWithForm('.popup_profile',item => profileData.setUserInfo(item));
 profilePopup.setEventListeners();
 
 const zoomCardPopup = new PopupWithImage('.popup_zoom-image');
 zoomCardPopup.setEventListeners();
 
 const cardList = new Section({ items: initialCards, renderer: (cardItem) => {
-        const element = new Card(cardItem, '#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
+        const element = new Card(cardItem,'#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
         const cardElement = element.generateCard();
+
         cardList.addItem(cardElement);
 }},'.elements');
 
@@ -45,6 +43,7 @@ function handleAddCard() {
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
     addCardPopup.closePopup();
+    addNewCardForm.toggleButtonState();
 }
 
 
