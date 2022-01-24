@@ -18,7 +18,10 @@ addNewCardForm.toggleButtonState();
 
 const profileData = new UserInfo({userName: '.profile__info-title', userOccupation: '.profile__info-subtitle'})
 
-const profilePopup = new PopupWithForm('.popup_profile',item => profileData.setUserInfo(item));
+const profilePopup = new PopupWithForm('.popup_profile',item => {
+    profileData.setUserInfo(item)
+    profilePopup.closePopup();
+});
 profilePopup.setEventListeners();
 
 const zoomCardPopup = new PopupWithImage('.popup_zoom-image');
