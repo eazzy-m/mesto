@@ -1,0 +1,37 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "photo_sharing_network",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "cssnano": "^5.0.16",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.2",
+    "postcss-loader": "^6.2.1",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "core-js": "^3.20.3"
+  },
+  "scripts": {
+    "build": "rimraf dist && webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eazzy-m/mesto.git"
+  },
+  "author": "Nikolay Kozich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eazzy-m/mesto/issues"
+  },
+  "homepage": "https://github.com/eazzy-m/mesto#readme"
+}

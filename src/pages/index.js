@@ -7,7 +7,7 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 
 import { validityConfig } from "../scripts/utils/config.js";
 import { editButton, name, job, addButton, formEditProfile, addCardForm, addCardFormImageSrc, addCardFormPlaceName, initialCards, } from "../scripts/utils/constants.js";
-import '../pages/index.css';
+import './index.css';
 
 const editProfileForm = new FormValidator(formEditProfile, validityConfig);
 editProfileForm.enableValidation();
