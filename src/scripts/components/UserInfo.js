@@ -6,15 +6,15 @@ class UserInfo {
     };
 
     setUserInfo(item) {
-        this._userName.textContent = item.profile_info_title;
-        this._userOccupation.textContent = item.profile_info_subtitle;
+        this._userName.textContent = item.userName;
+        this._userOccupation.textContent = item.userOccupation;
     };
 
     getUserInfo() {
-        const userInfo = {};
-        userInfo.profile_info_title = this._userName.textContent;
-        userInfo.profile_info_subtitle = this._userOccupation.textContent;
-        return userInfo;
+        return {
+            userName: this._userName.textContent,
+            userOccupation: this._userOccupation.textContent
+        };
     };
 }
 

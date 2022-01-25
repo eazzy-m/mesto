@@ -6,7 +6,7 @@ import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
 
 import { validityConfig } from "../scripts/utils/config.js";
-import { editButton, name, job, addButton, formEditProfile, addCardForm, addCardFormImageSrc, addCardFormPlaceName, initialCards, } from "../scripts/utils/constants.js";
+import { name, job, editButton, addButton, formEditProfile, addCardForm, initialCards } from "../scripts/utils/constants.js";
 import './index.css';
 
 const editProfileForm = new FormValidator(formEditProfile, validityConfig);
@@ -18,23 +18,27 @@ addNewCardForm.toggleButtonState();
 
 const profileData = new UserInfo({userName: '.profile__info-title', userOccupation: '.profile__info-subtitle'})
 
-const profilePopup = new PopupWithForm('.popup_profile',item => profileData.setUserInfo(item));
+const profilePopup = new PopupWithForm('.popup_profile',item => {
+    profileData.setUserInfo(item)
+    profilePopup.closePopup();
+});
 profilePopup.setEventListeners();
 
 const zoomCardPopup = new PopupWithImage('.popup_zoom-image');
 zoomCardPopup.setEventListeners();
 
-const cardList = new Section({ items: initialCards, renderer: (cardItem) => {
-        const element = new Card(cardItem,'#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
-        const cardElement = element.generateCard();
+const createCard = item => new Card(item,'#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
+
+const cardList = new Section({ items: initialCards, renderer: item => {
+        const card = createCard(item);
+        const cardElement = card.generateCard();
         cardList.addItem(cardElement);
 }},'.elements');
 
 cardList.renderItems();
 
-const addCardPopup = new PopupWithForm('.popup_elements',() => {
-    const newCardInput = {name: addCardFormPlaceName.value, link: addCardFormImageSrc.value};
-    const card = new Card(newCardInput,'#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
+const addCardPopup = new PopupWithForm('.popup_elements',item => {
+    const card = createCard(item);
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
     addCardPopup.closePopup();
@@ -48,9 +52,9 @@ addButton.addEventListener('click',() => {
 });
 
 editButton.addEventListener('click',() => {
-    profileData.getUserInfo()
-    name.value = profileData.getUserInfo().profile_info_title;
-    job.value = profileData.getUserInfo().profile_info_subtitle;
+    const userData = profileData.getUserInfo();
+    name.value = userData.userName;
+    job.value = userData.userOccupation;
     editProfileForm.hideErrorMessages();
     editProfileForm.toggleButtonState();
     profilePopup.openPopup();

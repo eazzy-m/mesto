@@ -5,8 +5,6 @@ export const formEditProfile = document.querySelector('.edit-profile-form');
 export const name = document.querySelector('#title-input');
 export const job = document.querySelector('#subtitle-input');
 export const addCardForm = document.querySelector('.add-card-form');
-export const addCardFormPlaceName = document.querySelector('#place-input');
-export const addCardFormImageSrc = document.querySelector('#url-input');
 
 export const initialCards = [
     {
