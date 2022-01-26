@@ -37,7 +37,7 @@
                     <div class="form__container">
                         <h3 class="form__title">Редактировать профиль</h3>
                         <input class="form__input"
-                               name="userName"
+                               name="name"
                                type="text"
                                placeholder="Имя"
                                value=""
@@ -47,7 +47,7 @@
                                required>
                         <span class="form__input-error title-input-error"></span>
                         <input class="form__input"
-                               name="userOccupation"
+                               name="about"
                                type="text"
                                placeholder="Профессиональная деятельность"
                                value=""
@@ -107,6 +107,38 @@
             </div>
         </section>
 
+        <section class="popup popup_confirm">
+            <div class="popup__container">
+                <button class="exit-button exit-button_popup-confirm opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
+                </button>
+                <div class="form__container">
+                    <h3 class="form__title form__title_confirm">Вы уверены?</h3>
+                <button class="confirm form__submit form__submit_confirm opacity" type="submit" aria-label="Да" value="Да" name="Да">Да</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="popup popup_avatar popup_open">
+            <div class="popup__container">
+                <button class="exit-button exit-button_popup-confirm opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
+                </button>
+                <form class="form">
+                    <div class="form__container">
+                        <h3 class="form__title">Обновить аватар</h3>
+                        <input class="form__input"
+                               name="avatar"
+                               type="url"
+                               placeholder="url для аватара"
+                               value=""
+                               id="avatar-input"
+                               required>
+                        <span class="form__input-error avatar-input-error"></span>
+                        <button class="confirm form__submit opacity" type="submit" aria-label="Да" value="Да" name="Да">Да</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
         <section class="elements">
 
         </section>
@@ -125,5 +157,6 @@
             </div>
         </div>
     </template>
+
 </body>
 </html>
