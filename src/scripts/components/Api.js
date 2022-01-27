@@ -1,6 +1,7 @@
 class Api {
-    constructor(options) {
-        this._options = options;
+    constructor({ baseUrl, headers }) {
+        this._baseUrl = baseUrl;
+        this._headers = headers;
     };
 
     _checkResponseStatus(res) {
@@ -8,46 +9,44 @@ class Api {
     }
 
     getUserInfo() {
-        return fetch(`${this._options.baseUrl}/users/me`,{
-            headers: this._options.headers,
+        return fetch(`${this._baseUrl}/users/me`,{
+            headers: this._headers,
         }).then(res => this._checkResponseStatus(res));
     };
 
-    getCardList() {
-        return fetch(`${this._options.baseUrl}/cards`,{
-            headers: this._options.headers,
+    getDefaultCards() {
+        return fetch(`${this._baseUrl}/cards`,{
+            method: 'GET',
+            headers: this._headers,
         }).then(res => this._checkResponseStatus(res));
     };
 
     changeLikeCard(cardId, like) {
-        return fetch(`${this._options.baseUrl}/cards/like/${cardId}`,{
+        return fetch(`${this._baseUrl}/cards/like/${cardId}`,{
             method: like ? 'DELETE' : 'PUT',
-            headers: this._options.headers,
+            headers: this._headers,
         }).then(res => this._checkResponseStatus(res));
     };
 
     removeCard(cardId) {
-        return fetch(`${this._options.baseUrl}/cards/${cardId}`,{
+        return fetch(`${this._baseUrl}/cards/${cardId}`,{
             method: 'DELETE',
-            headers: this._options.headers,
+            headers: this._headers,
         }).then(res => this._checkResponseStatus(res));
     };
 
-    addCard({ name, link }) {
-        return fetch(`${this._options.baseUrl}/cards`,{
+    addCard(item) {
+        return fetch(`${this._baseUrl}/cards`,{
             method: 'POST',
-            headers: this._options.headers,
-            body: JSON.stringify({
-                name,
-                link,
-            }),
+            headers: this._headers,
+            body: JSON.stringify(item),
         }).then(res => this._checkResponseStatus(res));
     };
 
     setUserInfo({ name, about }) {
-        return fetch(`${this._options.baseUrl}/users/me`,{
+        return fetch(`${this._baseUrl}/users/me`,{
             method: 'PATCH',
-            headers: this._options.headers,
+            headers: this._headers,
             body: JSON.stringify({
                 name,
                 about,
@@ -56,9 +55,9 @@ class Api {
     };
 
     setUserAvatar({ avatar }) {
-        return fetch(`${this._options.baseUrl}/users/me/avatar`,{
+        return fetch(`${this._baseUrl}/users/me/avatar`,{
             method: 'PATCH',
-            headers: this._options.headers,
+            headers: this._headers,
             body: JSON.stringify({avatar}),
         }).then(res => this._checkResponseStatus(res));
     };

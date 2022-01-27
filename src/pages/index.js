@@ -4,13 +4,23 @@ import { Section } from "../scripts/components/Section.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
+import {Api} from "../scripts/components/Api.js";
 
 import { validityConfig } from "../scripts/utils/config.js";
 import { name, job, editButton, addButton, formEditProfile, addCardForm, initialCards, avatarButton } from "../scripts/utils/constants.js";
 import './index.css';
+import {toArray} from "core-js/internals/async-iterator-iteration";
 
 const token = 'cd258dfe-1ea2-4752-b026-d46a9a2668de';
 const cohortId = 'cohort-34';
+
+const api = new Api({
+    baseUrl: `https://mesto.nomoreparties.co/v1/${cohortId}`,
+    headers: {
+        authorization: `${token}`,
+        'Content-Type': 'application/json',
+    },
+});
 
 const editProfileForm = new FormValidator(formEditProfile, validityConfig);
 editProfileForm.enableValidation();
@@ -32,13 +42,16 @@ zoomCardPopup.setEventListeners();
 
 const createCard = item => new Card(item,'#element-template',{handleCardClick: card => zoomCardPopup.openPopup(card)});
 
-const cardList = new Section({ items: initialCards, renderer: item => {
-        const card = createCard(item);
+const cardList = new Section({ renderer: item => {
+        cardList.addItem(item);
+    }},'.elements');
+
+api.getDefaultCards()
+    .then(res => res.forEach(item => {
+        const card = createCard(item)
         const cardElement = card.generateCard();
         cardList.addItem(cardElement);
-}},'.elements');
-
-cardList.renderItems();
+    }));
 
 const addCardPopup = new PopupWithForm('.popup_elements',item => {
     const card = createCard(item);
@@ -70,4 +83,4 @@ avatarButton.addEventListener('click',() => {
     });
     editAvatarPopup.openPopup();
     editAvatarPopup.setEventListeners();
-})
+});
