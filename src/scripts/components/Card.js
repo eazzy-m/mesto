@@ -1,4 +1,6 @@
 
+import { PopupWithForm } from "./PopupWithForm.js";
+
 class Card {
     constructor(data, templateSelector, { handleCardClick }) {
         this._name = data.name;
@@ -25,8 +27,13 @@ class Card {
 
         const deleteCardButton = this._element.querySelector('.delete-element-button');
         deleteCardButton.addEventListener('click',() => {
-            this._element.remove();
-            this._element = null;
+            const popupConfirm = new PopupWithForm('.popup_confirm',() => {
+                this._element.remove();
+                this._element = null;
+                popupConfirm.closePopup();
+            });
+            popupConfirm.openPopup()
+            popupConfirm.setEventListeners();
         });
     };
 

@@ -6,6 +6,7 @@
 @import "../blocks/main/main.css";
 @import "../blocks/profile/profile.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__overlay/profile__overlay.css";
 @import "../blocks/profile/__info/profile__info.css";
 @import "../blocks/profile/__info-title/profile__info-title.css";
 @import "../blocks/profile/__info-subtitle/profile__info-subtitle.css";
@@ -37,6 +38,8 @@
 @import "../blocks/opacity/opacity.css";
 @import "../blocks/element/element.css";
 @import "../blocks/element/__mask-group/element__mask-group.css";
+@import "../blocks/element/__like-container/element__like-container.css";
+@import "../blocks/element/__like-counter/element__like-counter.css";
 @import "../blocks/element/__description/element__description.css";
 @import "../blocks/element/__text/element__text.css";
 @import "../blocks/like-button/like-button.css";

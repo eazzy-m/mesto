@@ -12,7 +12,9 @@
     
     <main class="main">
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/image.png')%>" alt="Это Вы">
+            <div class="profile__overlay">
+                <img class="profile__avatar" src="<%=require('./images/image.png')%>" alt="Это Вы">
+            </div>
             <div class="profile__info">
                 <h1 class="profile__info-title">Жак-Ив Кусто</h1>
                 <button class="edit-button opacity button-open-form" type="button" aria-label="изменить">
@@ -111,18 +113,20 @@
             <div class="popup__container">
                 <button class="exit-button exit-button_popup-confirm opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
                 </button>
-                <div class="form__container">
-                    <h3 class="form__title form__title_confirm">Вы уверены?</h3>
-                <button class="confirm form__submit form__submit_confirm opacity" type="submit" aria-label="Да" value="Да" name="Да">Да</button>
-                </div>
+                <form class="form" name="delete-card" novalidate>
+                    <div class="form__container">
+                        <h3 class="form__title form__title_confirm">Вы уверены?</h3>
+                    <button class="confirm form__submit form__submit_confirm opacity" type="submit" aria-label="Да" value="Да" name="Да">Да</button>
+                    </div>
+                </form>
             </div>
         </section>
 
-        <section class="popup popup_avatar popup_open">
+        <section class="popup popup_avatar">
             <div class="popup__container">
                 <button class="exit-button exit-button_popup-confirm opacity" type="reset" aria-label="выйти" value="выйти" name="выйти">
                 </button>
-                <form class="form">
+                <form class="form" name="change-avatar" novalidate>
                     <div class="form__container">
                         <h3 class="form__title">Обновить аватар</h3>
                         <input class="form__input"
@@ -153,7 +157,10 @@
             <img class="element__mask-group" src="#" alt="">
             <div class="element__description">
                 <h2 class="element__text"></h2>
+                <div class="element__like-container">
                 <button class="like-button opacity" type="button" aria-label="нравится"></button>
+                <span class='element__like-counter'>0</span>
+                </div>
             </div>
         </div>
     </template>

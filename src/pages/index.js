@@ -6,7 +6,7 @@ import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
 
 import { validityConfig } from "../scripts/utils/config.js";
-import { name, job, editButton, addButton, formEditProfile, addCardForm, initialCards } from "../scripts/utils/constants.js";
+import { name, job, editButton, addButton, formEditProfile, addCardForm, initialCards, avatarButton } from "../scripts/utils/constants.js";
 import './index.css';
 
 const token = 'cd258dfe-1ea2-4752-b026-d46a9a2668de';
@@ -62,3 +62,12 @@ editButton.addEventListener('click',() => {
     editProfileForm.toggleButtonState();
     profilePopup.openPopup();
 });
+
+avatarButton.addEventListener('click',() => {
+    const editAvatarPopup = new PopupWithForm('.popup_avatar',() => {
+        //
+        editAvatarPopup.closePopup();
+    });
+    editAvatarPopup.openPopup();
+    editAvatarPopup.setEventListeners();
+})
