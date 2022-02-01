@@ -8,13 +8,13 @@ class Api {
         return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     }
 
-    getUserInfo() {
+    getUserInfoFromServer() {
         return fetch(`${this._baseUrl}/users/me`,{
             headers: this._headers,
         }).then(res => this._checkResponseStatus(res));
     };
 
-    getDefaultCards() {
+    getCardsFromServer() {
         return fetch(`${this._baseUrl}/cards`,{
             method: 'GET',
             headers: this._headers,
@@ -28,22 +28,25 @@ class Api {
         }).then(res => this._checkResponseStatus(res));
     };
 
-    removeCard(cardId) {
+    deleteCardFromServer(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`,{
             method: 'DELETE',
             headers: this._headers,
         }).then(res => this._checkResponseStatus(res));
     };
 
-    addCard(item) {
+    addCardToServer({ name, link }) {
         return fetch(`${this._baseUrl}/cards`,{
             method: 'POST',
             headers: this._headers,
-            body: JSON.stringify(item),
+            body: JSON.stringify({
+                name,
+                link
+            }),
         }).then(res => this._checkResponseStatus(res));
     };
 
-    setUserInfo({ name, about }) {
+    patchUserInfo({ name, about }) {
         return fetch(`${this._baseUrl}/users/me`,{
             method: 'PATCH',
             headers: this._headers,
@@ -54,7 +57,7 @@ class Api {
         }).then(res => this._checkResponseStatus(res));
     };
 
-    setUserAvatar({ avatar }) {
+    patchUserAvatar({ avatar }) {
         return fetch(`${this._baseUrl}/users/me/avatar`,{
             method: 'PATCH',
             headers: this._headers,

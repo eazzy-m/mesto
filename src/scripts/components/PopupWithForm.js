@@ -7,12 +7,17 @@ class PopupWithForm extends Popup {
         this._handleSubmit = handleSubmit;
         this._inputList = this._popup.querySelectorAll('.form__input');
         this._form = this._popup.querySelector('.form');
+        this._submitButton = this._popup.querySelector('.form__submit');
     };
 
     _getInputValues() {
         this._formValues = {};
         this._inputList.forEach(input => this._formValues[input.name] = input.value);
         return this._formValues;
+    };
+
+    toggleButtonName(isToggle) {
+        isToggle ? this._submitButton.textContent = 'Загрузка...' : this._submitButton.textContent = 'Сохранить'
     };
 
     setEventListeners() {

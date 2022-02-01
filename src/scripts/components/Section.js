@@ -1,15 +1,7 @@
 
 class Section {
-    constructor({ renderer }, containerSelector) {
-
-        this._renderer = renderer;
+    constructor(containerSelector) {
         this._container = document.querySelector(containerSelector);
-    };
-
-    renderItems(data) {
-        data.forEach(item => {
-            this._renderer(item);
-        });
     };
 
     addItem(element) {
