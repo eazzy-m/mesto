@@ -16,8 +16,8 @@ class PopupWithForm extends Popup {
         return this._formValues;
     };
 
-    toggleButtonName(isToggle) {
-        isToggle ? this._submitButton.textContent = 'Загрузка...' : this._submitButton.textContent = 'Сохранить'
+    toggleButtonName(isToggle, text) {
+        isToggle ? this._submitButton.textContent = text : this._submitButton.textContent = text;
     };
 
     setEventListeners() {

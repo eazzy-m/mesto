@@ -35,6 +35,7 @@ class Card {
             deleteCardButton.addEventListener('click', () => {
                 const popupConfirm = new PopupWithForm('.popup_confirm',() => {
                     this._handleDeleteCard(this.id, popupConfirm);
+                    popupConfirm.closePopup();
                     this.removeCard();
                 });
                 popupConfirm.openPopup();
