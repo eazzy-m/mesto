@@ -48,9 +48,10 @@ api.getCardsFromServer()
     .catch(err => `При загрузке карточек возникла ошибка ${err}`);
 
 function handleDeleteCard(cardId, popup) {
+    popup.toggleButtonName(true, 'Подождите...')
     api.deleteCardFromServer(cardId)
         .catch(err => `При удалении карточки возникла ошибка ${err}`)
-        .finally(() => popup.closePopup());
+        .finally(() => popup.toggleButtonName(false, 'Да'));
 }
 
 function handleLikeCard(card) {
@@ -66,13 +67,13 @@ const createCard = item => new Card(item,'#element-template', profileData.getUse
 });
 
 function saveUserProfileOnServer(userData) {
-    profilePopup.toggleButtonName(true);
+    profilePopup.toggleButtonName(true, 'Сохранение...');
     api.patchUserInfo(userData)
         .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
         .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
         .finally(() => {
-            profilePopup.toggleButtonName(false);
-            profilePopup.closePopup()});
+            profilePopup.closePopup()
+            profilePopup.toggleButtonName(false, 'Cохранить')});
 }
 
 const profilePopup = new PopupWithForm('.popup_profile',item => {
@@ -81,15 +82,15 @@ const profilePopup = new PopupWithForm('.popup_profile',item => {
 profilePopup.setEventListeners();
 
 function patchAvatar(imageLink) {
-    editAvatarPopup.toggleButtonName(true);
+    editAvatarPopup.toggleButtonName(true, 'Сохранение...');
     api.patchUserAvatar(imageLink)
         .then(res => {
             profileData.setUserAvatar(res.avatar)
             editAvatarForm.toggleButtonState()})
         .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
         .finally(() => {
-            editAvatarPopup.toggleButtonName(false);
-            editAvatarPopup.closePopup()});
+            editAvatarPopup.closePopup();
+            editAvatarPopup.toggleButtonName(false, 'Cохранить')});
 }
 
 const editAvatarPopup = new PopupWithForm('.popup_avatar',item => patchAvatar(item));
@@ -99,14 +100,16 @@ const zoomCardPopup = new PopupWithImage('.popup_zoom-image');
 zoomCardPopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm('.popup_elements',item => {
+    addCardPopup.toggleButtonName(true, 'Сохранение...')
     api.addCardToServer({name: item.name, link: item.link})
         .then(res => {
             const card = createCard(res);
             const cardElement = card.generateCard();
             cardList.addItem(cardElement)})
         .finally(() => {
-        addCardPopup.closePopup();
-        addNewCardForm.toggleButtonState();
+            addCardPopup.toggleButtonName(false, 'Создать')
+            addCardPopup.closePopup();
+            addNewCardForm.toggleButtonState();
     });
 });
 addCardPopup.setEventListeners();
