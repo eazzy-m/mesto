@@ -21,25 +21,9 @@ const api = new Api({
     },
 });
 
-const profileData = new UserInfo(
-    {name: '.profile__info-title',
-        about: '.profile__info-subtitle',
-        avatar: '.profile__avatar'});
+const profileData = new UserInfo({name: '.profile__info-title', about: '.profile__info-subtitle', avatar: '.profile__avatar'});
 
-api.getUserInfoFromServer()
-    .then(res => {
-        profileData.setUserInfo({name: res.name, about: res.about, id: res._id})
-        profileData.setUserAvatar(res.avatar)
-        return profileData.getUserInfo()})
-    .catch(err => `При загрузке данных о пользователе произошла ошибка: ${err}`)
-
-api.getCardsFromServer()
-    .then(res => res.forEach(item => {
-       // console.log(item);
-        const card = createCard(item);
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement)}))
-    .catch(err => `При загрузке карточек с сервера произошла ошибка: ${err}`);
+const cardList = new Section('.elements');
 
 const editProfileForm = new FormValidator(formEditProfile, validityConfig);
 editProfileForm.enableValidation();
@@ -50,19 +34,18 @@ addNewCardForm.toggleButtonState();
 
 const editAvatarForm = new FormValidator(avatarForm, validityConfig);
 editAvatarForm.enableValidation();
-addNewCardForm.toggleButtonState();
+editAvatarForm.toggleButtonState();
 
-function saveUserProfileOnServer(userData) {
-    profilePopup.toggleButtonName(true);
-    api.patchUserInfo(userData)
-        .then(res => {
-            profileData.setUserInfo({name: res.name, about: res.about, id: res._id});
-        })
-        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
-        .finally(() => {
-            profilePopup.toggleButtonName(false);
-            profilePopup.closePopup()});
-}
+api.getUserInfoFromServer()
+    .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
+    .catch(err => `При загрузке данных пользователя возникла ошибка ${err}`);
+
+api.getCardsFromServer()
+    .then(res => res.forEach(item => {
+        const card = createCard(item);
+        const cardElement = card.generateCard();
+        cardList.addItem(cardElement)}))
+    .catch(err => `При загрузке карточек возникла ошибка ${err}`);
 
 function handleDeleteCard(cardId, popup) {
     api.deleteCardFromServer(cardId)
@@ -70,48 +53,58 @@ function handleDeleteCard(cardId, popup) {
         .finally(() => popup.closePopup());
 }
 
-const createCard = item => new Card(item,'#element-template', profileData.getUserInfo().id, {
+function handleLikeCard(card) {
+    api.changeLikeCard(card.id, card.isLiked())
+        .then(data => card.updateLikeCounter(data))
+        .catch(err => console.log(`При обновлении лайка карточки возникла ошибка: ${err}`));
+}
+
+const createCard = item => new Card(item,'#element-template', profileData.getUserInfo(), {
     handleCardClick: card => zoomCardPopup.openPopup(card),
     handleDeleteCard: (cardId, popup) => handleDeleteCard(cardId, popup),
-    handleLikeCard: card => {}
+    handleLikeCard: card => handleLikeCard(card)
 });
+
+function saveUserProfileOnServer(userData) {
+    profilePopup.toggleButtonName(true);
+    api.patchUserInfo(userData)
+        .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
+        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
+        .finally(() => {
+            profilePopup.toggleButtonName(false);
+            profilePopup.closePopup()});
+}
 
 const profilePopup = new PopupWithForm('.popup_profile',item => {
     saveUserProfileOnServer(item);
 });
+profilePopup.setEventListeners();
 
 function patchAvatar(imageLink) {
     editAvatarPopup.toggleButtonName(true);
     api.patchUserAvatar(imageLink)
         .then(res => {
-            profileData.setUserAvatar(res.avatar);
-            profileData.setUserId(res._id);
-        })
-        .catch(err => {`При отправке аватара на сервер возникла ошибка: ${err}`})
+            profileData.setUserAvatar(res.avatar)
+            editAvatarForm.toggleButtonState()})
+        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
         .finally(() => {
             editAvatarPopup.toggleButtonName(false);
-            editAvatarPopup.closePopup();
-            editAvatarForm.toggleButtonState()});
+            editAvatarPopup.closePopup()});
 }
 
-const editAvatarPopup = new PopupWithForm('.popup_avatar',item => {
-    patchAvatar(item);
-});
-
-profilePopup.setEventListeners();
+const editAvatarPopup = new PopupWithForm('.popup_avatar',item => patchAvatar(item));
+editAvatarPopup.setEventListeners();
 
 const zoomCardPopup = new PopupWithImage('.popup_zoom-image');
 zoomCardPopup.setEventListeners();
-
-const cardList = new Section('.elements');
 
 const addCardPopup = new PopupWithForm('.popup_elements',item => {
     api.addCardToServer({name: item.name, link: item.link})
         .then(res => {
             const card = createCard(res);
             const cardElement = card.generateCard();
-            cardList.addItem(cardElement);
-        }).finally(() => {
+            cardList.addItem(cardElement)})
+        .finally(() => {
         addCardPopup.closePopup();
         addNewCardForm.toggleButtonState();
     });
@@ -125,7 +118,6 @@ addButton.addEventListener('click',() => {
 
 editButton.addEventListener('click',() => {
     const userData = profileData.getUserInfo();
-    console.log("3",profileData.getUserInfo())
     name.value = userData.name;
     job.value = userData.about;
     editProfileForm.hideErrorMessages();
@@ -133,8 +125,7 @@ editButton.addEventListener('click',() => {
     profilePopup.openPopup();
 });
 
-
 avatarButton.addEventListener('click',() => {
+    editAvatarForm.hideErrorMessages();
     editAvatarPopup.openPopup();
-    editAvatarPopup.setEventListeners();
 });

@@ -5,8 +5,8 @@ class Api {
     };
 
     _checkResponseStatus(res) {
-        return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    }
+        return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    };
 
     getUserInfoFromServer() {
         return fetch(`${this._baseUrl}/users/me`,{
@@ -21,10 +21,14 @@ class Api {
         }).then(res => this._checkResponseStatus(res));
     };
 
-    changeLikeCard(cardId, like) {
-        return fetch(`${this._baseUrl}/cards/like/${cardId}`,{
-            method: like ? 'DELETE' : 'PUT',
+    addCardToServer({ name, link }) {
+        return fetch(`${this._baseUrl}/cards`,{
+            method: 'POST',
             headers: this._headers,
+            body: JSON.stringify({
+                name,
+                link
+            }),
         }).then(res => this._checkResponseStatus(res));
     };
 
@@ -35,14 +39,10 @@ class Api {
         }).then(res => this._checkResponseStatus(res));
     };
 
-    addCardToServer({ name, link }) {
-        return fetch(`${this._baseUrl}/cards`,{
-            method: 'POST',
+    changeLikeCard(cardId, like) {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`,{
+            method: like ? 'DELETE' : 'PUT',
             headers: this._headers,
-            body: JSON.stringify({
-                name,
-                link
-            }),
         }).then(res => this._checkResponseStatus(res));
     };
 
@@ -64,7 +64,6 @@ class Api {
             body: JSON.stringify({avatar}),
         }).then(res => this._checkResponseStatus(res));
     };
-
 }
 
 export { Api }
