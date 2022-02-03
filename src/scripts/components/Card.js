@@ -24,7 +24,7 @@ class Card {
     };
 
     _setEventListeners(elementsImage) {
-        elementsImage.addEventListener('click', () => this._handleCardClick({ name : elementsImage.name, link: elementsImage.src }));
+        elementsImage.addEventListener('click', () => this._handleCardClick({ name : this.name, link: this.link }));
 
         this._element.querySelector('.like-button').addEventListener('click',() => this._handleLikeCard(this));
 

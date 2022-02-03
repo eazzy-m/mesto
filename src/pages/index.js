@@ -44,17 +44,17 @@ api.getDefaultData()
             const card = createCard(item);
             const cardElement = card.generateCard();
             cardList.addItem(cardElement)})})
-    .catch(err => `При получении данных возникла ошибка ${err}`)
+    .catch(err => alert(`При загрузке данных с сервера возникла ${err}`));
 
 function handleDeleteCard(card) {
     const popupConfirm = new PopupWithForm('.popup_confirm',() => {
         popupConfirm.toggleButtonName(true, 'Подождите...')
         api.deleteCardFromServer(card.id)
-            .then(() => card.removeCard())
-            .catch(err => `При удалении карточки возникла ошибка ${err}`)
-            .finally(() => {
-                popupConfirm.closePopup();
-                popupConfirm.toggleButtonName(false, 'Да')});
+            .then(() => {
+                card.removeCard();
+                popupConfirm.closePopup()})
+            .catch(err => alert(`При удалении карточки возникла ${err}`))
+            .finally(() => popupConfirm.toggleButtonName(false, 'Да'));
     })
     popupConfirm.openPopup();
     popupConfirm.setEventListeners();
@@ -63,7 +63,7 @@ function handleDeleteCard(card) {
 function handleLikeCard(card) {
     api.changeLikeCard(card.id, card.isLiked())
         .then(data => card.updateLikeCounter(data))
-        .catch(err => console.log(`При обновлении лайка карточки возникла ошибка: ${err}`));
+        .catch(err => alert(`При обновлении лайка карточки возникла ${err}`));
 }
 
 const createCard = item => new Card(item,'#element-template', profileData.getUserInfo(), {
@@ -75,11 +75,11 @@ const createCard = item => new Card(item,'#element-template', profileData.getUse
 function saveUserProfileOnServer(userData) {
     profilePopup.toggleButtonName(true, 'Сохранение...');
     api.patchUserInfo(userData)
-        .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
-        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
-        .finally(() => {
-            profilePopup.closePopup()
-            profilePopup.toggleButtonName(false, 'Cохранить')});
+        .then(res => {
+            profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar});
+            profilePopup.closePopup()})
+        .catch(err => alert(`При обновлении данных пользователя возникла ${err}`))
+        .finally(() => profilePopup.toggleButtonName(false, 'Cохранить'));
 }
 
 const profilePopup = new PopupWithForm('.popup_profile',item => {
@@ -91,12 +91,11 @@ function patchAvatar(imageLink) {
     editAvatarPopup.toggleButtonName(true, 'Сохранение...');
     api.patchUserAvatar(imageLink)
         .then(res => {
-            profileData.setUserAvatar(res.avatar)
-            editAvatarForm.toggleButtonState()})
-        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
-        .finally(() => {
+            profileData.setUserAvatar(res.avatar);
             editAvatarPopup.closePopup();
-            editAvatarPopup.toggleButtonName(false, 'Cохранить')});
+            editAvatarForm.toggleButtonState()})
+        .catch(err => alert(`При обновлении аватара возникла ${err}`))
+        .finally(() => editAvatarPopup.toggleButtonName(false, 'Cохранить'));
 }
 
 const editAvatarPopup = new PopupWithForm('.popup_avatar',item => patchAvatar(item));
@@ -111,10 +110,11 @@ const addCardPopup = new PopupWithForm('.popup_elements',item => {
         .then(res => {
             const card = createCard(res);
             const cardElement = card.generateCard();
+            addCardPopup.closePopup();
             cardList.addItem(cardElement)})
+        .catch(err => alert(`При добавлении карточки возникла ${err}`))
         .finally(() => {
             addCardPopup.toggleButtonName(false, 'Создать')
-            addCardPopup.closePopup();
             addNewCardForm.toggleButtonState();
     });
 });
