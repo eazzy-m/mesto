@@ -43,8 +43,8 @@ api.getDefaultData()
         cards.forEach(item => {
             const card = createCard(item);
             const cardElement = card.generateCard();
-            cardList.addItem(cardElement)})
-    })
+            cardList.addItem(cardElement)})})
+    .catch(err => `При получении данных возникла ошибка ${err}`)
 
 function handleDeleteCard(cardId, popup) {
     popup.toggleButtonName(true, 'Подождите...')

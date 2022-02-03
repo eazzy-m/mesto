@@ -4,6 +4,7 @@ class FormValidator {
         this._formElement = formElement;
         this._settings = settings;
         this._inputsList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+        this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
     };
 
     _showInputError(inputElement, validationMessage) {
@@ -34,7 +35,6 @@ class FormValidator {
     };
 
     toggleButtonState() {
-        this._formSubmitButton = this._formElement.querySelector(this._settings.submitButtonSelector);
         const isFormValid = this._formElement.checkValidity();
         this._formSubmitButton.disabled = !isFormValid;
         this._formSubmitButton.classList.toggle(this._settings.inactiveButtonClass, !isFormValid);
