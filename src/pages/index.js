@@ -36,16 +36,15 @@ const editAvatarForm = new FormValidator(avatarForm, validityConfig);
 editAvatarForm.enableValidation();
 editAvatarForm.toggleButtonState();
 
-api.getUserInfoFromServer()
-    .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
-    .catch(err => `При загрузке данных пользователя возникла ошибка ${err}`);
 
-api.getCardsFromServer()
-    .then(res => res.forEach(item => {
-        const card = createCard(item);
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement)}))
-    .catch(err => `При загрузке карточек возникла ошибка ${err}`);
+api.getDefaultData()
+    .then(([userData, cards]) => {
+        profileData.setUserInfo({name: userData.name, about: userData.about, id: userData._id, avatar: userData.avatar})
+        cards.forEach(item => {
+            const card = createCard(item);
+            const cardElement = card.generateCard();
+            cardList.addItem(cardElement)})
+    })
 
 function handleDeleteCard(cardId, popup) {
     popup.toggleButtonName(true, 'Подождите...')
