@@ -1,6 +1,4 @@
 
-import { PopupWithForm } from "./PopupWithForm.js";
-
 class Card {
     constructor(data, templateSelector, user, { handleCardClick, handleDeleteCard, handleLikeCard }) {
         this.data = data;
@@ -31,17 +29,9 @@ class Card {
         this._element.querySelector('.like-button').addEventListener('click',() => this._handleLikeCard(this));
 
         const deleteCardButton = this._element.querySelector('.delete-element-button');
-        if (this.ownerId === this.userId) {
-            deleteCardButton.addEventListener('click', () => {
-                const popupConfirm = new PopupWithForm('.popup_confirm',() => {
-                    this._handleDeleteCard(this.id, popupConfirm);
-                    popupConfirm.closePopup();
-                    this.removeCard();
-                });
-                popupConfirm.openPopup();
-                popupConfirm.setEventListeners();
-            });
-        } else deleteCardButton.remove();
+        this.ownerId === this.userId ?
+            (deleteCardButton.addEventListener('click', () => this._handleDeleteCard(this)))
+         : (deleteCardButton.remove())
     };
 
     removeCard() {
@@ -66,6 +56,7 @@ class Card {
         this._element = this._getTemplate();
         this._toggleLike();
         const elementsImage = this._element.querySelector('.element__mask-group');
+        this._likeButton = this._element.querySelector('.like-button');
         this._setEventListeners(elementsImage);
         elementsImage.alt = this.name;
         elementsImage.src = this.link;

@@ -46,11 +46,18 @@ api.getDefaultData()
             cardList.addItem(cardElement)})})
     .catch(err => `При получении данных возникла ошибка ${err}`)
 
-function handleDeleteCard(cardId, popup) {
-    popup.toggleButtonName(true, 'Подождите...')
-    api.deleteCardFromServer(cardId)
-        .catch(err => `При удалении карточки возникла ошибка ${err}`)
-        .finally(() => popup.toggleButtonName(false, 'Да'));
+function handleDeleteCard(card) {
+    const popupConfirm = new PopupWithForm('.popup_confirm',() => {
+        popupConfirm.toggleButtonName(true, 'Подождите...')
+        api.deleteCardFromServer(card.id)
+            .then(() => card.removeCard())
+            .catch(err => `При удалении карточки возникла ошибка ${err}`)
+            .finally(() => {
+                popupConfirm.closePopup();
+                popupConfirm.toggleButtonName(false, 'Да')});
+    })
+    popupConfirm.openPopup();
+    popupConfirm.setEventListeners();
 }
 
 function handleLikeCard(card) {
@@ -61,7 +68,7 @@ function handleLikeCard(card) {
 
 const createCard = item => new Card(item,'#element-template', profileData.getUserInfo(), {
     handleCardClick: card => zoomCardPopup.openPopup(card),
-    handleDeleteCard: (cardId, popup) => handleDeleteCard(cardId, popup),
+    handleDeleteCard: (card) => handleDeleteCard(card),
     handleLikeCard: card => handleLikeCard(card)
 });
 
