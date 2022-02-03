@@ -3,9 +3,9 @@
     padding: 0;
 }
 
-@media screen and (max-width: 970px){
+@media screen and (max-width: 970px) {
     .form__submit_confirm {
         margin: 0;
-        padding: 0
+        padding: 0;
     }
 }
