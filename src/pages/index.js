@@ -46,9 +46,12 @@ api.getDefaultData()
             cardList.addItem(cardElement)})})
     .catch(err => alert(`При загрузке данных с сервера возникла ${err}`));
 
+const popupConfirm = new PopupWithForm('.popup_confirm');
+popupConfirm.setEventListeners();
+
 function handleDeleteCard(card) {
-    const popupConfirm = new PopupWithForm('.popup_confirm',() => {
-        popupConfirm.toggleButtonName(true, 'Подождите...')
+    popupConfirm.setSubmitCallback(() => {
+        popupConfirm.toggleButtonName(true, 'Подождите...');
         api.deleteCardFromServer(card.id)
             .then(() => {
                 card.removeCard();
@@ -57,7 +60,6 @@ function handleDeleteCard(card) {
             .finally(() => popupConfirm.toggleButtonName(false, 'Да'));
     })
     popupConfirm.openPopup();
-    popupConfirm.setEventListeners();
 }
 
 function handleLikeCard(card) {
@@ -82,10 +84,11 @@ function saveUserProfileOnServer(userData) {
         .finally(() => profilePopup.toggleButtonName(false, 'Cохранить'));
 }
 
-const profilePopup = new PopupWithForm('.popup_profile',item => {
+const profilePopup = new PopupWithForm('.popup_profile', item => {
     saveUserProfileOnServer(item);
 });
 profilePopup.setEventListeners();
+
 
 function patchAvatar(imageLink) {
     editAvatarPopup.toggleButtonName(true, 'Сохранение...');

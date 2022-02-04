@@ -25,9 +25,7 @@ class Card {
 
     _setEventListeners(elementsImage) {
         elementsImage.addEventListener('click', () => this._handleCardClick({ name : this.name, link: this.link }));
-
-        this._element.querySelector('.like-button').addEventListener('click',() => this._handleLikeCard(this));
-
+        this._likeButton.addEventListener('click',() => this._handleLikeCard(this));
         const deleteCardButton = this._element.querySelector('.delete-element-button');
         this.ownerId === this.userId ?
             (deleteCardButton.addEventListener('click', () => this._handleDeleteCard(this)))
@@ -39,8 +37,8 @@ class Card {
     };
 
     _toggleLike() {
-        this._element.querySelector('.element__like-counter').textContent = this.likes.length;
-        this._element.querySelector('.like-button').classList.toggle('like-button_active', this.isLiked());
+        this._likeCounter.textContent = this.likes.length;
+        this._likeButton.classList.toggle('like-button_active', this.isLiked());
     };
 
     isLiked() {
@@ -54,9 +52,10 @@ class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._likeCounter = this._element.querySelector('.element__like-counter');
+        this._likeButton = this._element.querySelector('.like-button');
         this._toggleLike();
         const elementsImage = this._element.querySelector('.element__mask-group');
-        this._likeButton = this._element.querySelector('.like-button');
         this._setEventListeners(elementsImage);
         elementsImage.alt = this.name;
         elementsImage.src = this.link;
