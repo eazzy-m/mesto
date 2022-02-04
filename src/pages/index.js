@@ -7,7 +7,7 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 import { Api } from "../scripts/components/Api.js";
 
 import { validityConfig } from "../scripts/utils/config.js";
-import { name, job, editButton, addButton, formEditProfile, addCardForm, avatarForm, avatarButton } from "../scripts/utils/constants.js";
+import { name, job, editButton, addButton, formEditProfile, addCardForm, avatarForm, avatarButton, initialCards } from "../scripts/utils/constants.js";
 import './index.css';
 
 const token = 'cd258dfe-1ea2-4752-b026-d46a9a2668de';
@@ -21,10 +21,6 @@ const api = new Api({
     },
 });
 
-const profileData = new UserInfo({name: '.profile__info-title', about: '.profile__info-subtitle', avatar: '.profile__avatar'});
-
-const cardList = new Section('.elements');
-
 const editProfileForm = new FormValidator(formEditProfile, validityConfig);
 editProfileForm.enableValidation();
 
@@ -36,15 +32,30 @@ const editAvatarForm = new FormValidator(avatarForm, validityConfig);
 editAvatarForm.enableValidation();
 editAvatarForm.toggleButtonState();
 
+const profileData = new UserInfo({name: '.profile__info-title', about: '.profile__info-subtitle', avatar: '.profile__avatar'});
+
+const cardList = new Section('.elements', initialCards,item => addCardToPage(item));
+
+const createCard = item => new Card(item,'#element-template', profileData.getUserInfo(), {
+    handleCardClick: card => zoomCardPopup.openPopup(card),
+    handleDeleteCard: (card) => handleDeleteCard(card),
+    handleLikeCard: card => handleLikeCard(card)
+});
+
+const addCardToPage = item => {
+    const card = createCard(item);
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement)
+}
 
 api.getDefaultData()
     .then(([userData, cards]) => {
         profileData.setUserInfo({name: userData.name, about: userData.about, id: userData._id, avatar: userData.avatar})
-        cards.forEach(item => {
-            const card = createCard(item);
-            const cardElement = card.generateCard();
-            cardList.addItem(cardElement)})})
-    .catch(err => alert(`При загрузке данных с сервера возникла ${err}`));
+        cards.forEach(item => addCardToPage(item))})
+    .catch(err => {
+        alert(`При загрузке данных с сервера возникла ${err}`);
+        cardList.renderItems();
+    });
 
 const popupConfirm = new PopupWithForm('.popup_confirm');
 popupConfirm.setEventListeners();
@@ -67,12 +78,6 @@ function handleLikeCard(card) {
         .then(data => card.updateLikeCounter(data))
         .catch(err => alert(`При обновлении лайка карточки возникла ${err}`));
 }
-
-const createCard = item => new Card(item,'#element-template', profileData.getUserInfo(), {
-    handleCardClick: card => zoomCardPopup.openPopup(card),
-    handleDeleteCard: (card) => handleDeleteCard(card),
-    handleLikeCard: card => handleLikeCard(card)
-});
 
 function saveUserProfileOnServer(userData) {
     profilePopup.toggleButtonName(true, 'Сохранение...');
@@ -111,10 +116,8 @@ const addCardPopup = new PopupWithForm('.popup_elements',item => {
     addCardPopup.toggleButtonName(true, 'Сохранение...')
     api.addCardToServer({name: item.name, link: item.link})
         .then(res => {
-            const card = createCard(res);
-            const cardElement = card.generateCard();
-            addCardPopup.closePopup();
-            cardList.addItem(cardElement)})
+            addCardToPage(res);
+            addCardPopup.closePopup()})
         .catch(err => alert(`При добавлении карточки возникла ${err}`))
         .finally(() => {
             addCardPopup.toggleButtonName(false, 'Создать')
