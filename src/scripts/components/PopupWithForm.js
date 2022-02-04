@@ -20,6 +20,10 @@ class PopupWithForm extends Popup {
         isToggle ? this._submitButton.textContent = text : this._submitButton.textContent = text;
     };
 
+    setSubmitCallback(callback) {
+        this._handleSubmit = callback;
+    };
+
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', e => {

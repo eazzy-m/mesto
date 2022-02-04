@@ -1,6 +1,4 @@
 
-import { PopupWithForm } from "./PopupWithForm.js";
-
 class Card {
     constructor(data, templateSelector, user, { handleCardClick, handleDeleteCard, handleLikeCard }) {
         this.data = data;
@@ -26,22 +24,12 @@ class Card {
     };
 
     _setEventListeners(elementsImage) {
-        elementsImage.addEventListener('click', () => this._handleCardClick({ name : elementsImage.name, link: elementsImage.src }));
-
-        this._element.querySelector('.like-button').addEventListener('click',() => this._handleLikeCard(this));
-
+        elementsImage.addEventListener('click', () => this._handleCardClick({ name : this.name, link: this.link }));
+        this._likeButton.addEventListener('click',() => this._handleLikeCard(this));
         const deleteCardButton = this._element.querySelector('.delete-element-button');
-        if (this.ownerId === this.userId) {
-            deleteCardButton.addEventListener('click', () => {
-                const popupConfirm = new PopupWithForm('.popup_confirm',() => {
-                    this._handleDeleteCard(this.id, popupConfirm);
-                    popupConfirm.closePopup();
-                    this.removeCard();
-                });
-                popupConfirm.openPopup();
-                popupConfirm.setEventListeners();
-            });
-        } else deleteCardButton.remove();
+        this.ownerId === this.userId ?
+            (deleteCardButton.addEventListener('click', () => this._handleDeleteCard(this)))
+         : (deleteCardButton.remove())
     };
 
     removeCard() {
@@ -49,8 +37,8 @@ class Card {
     };
 
     _toggleLike() {
-        this._element.querySelector('.element__like-counter').textContent = this.likes.length;
-        this._element.querySelector('.like-button').classList.toggle('like-button_active', this.isLiked());
+        this._likeCounter.textContent = this.likes.length;
+        this._likeButton.classList.toggle('like-button_active', this.isLiked());
     };
 
     isLiked() {
@@ -64,6 +52,8 @@ class Card {
 
     generateCard() {
         this._element = this._getTemplate();
+        this._likeCounter = this._element.querySelector('.element__like-counter');
+        this._likeButton = this._element.querySelector('.like-button');
         this._toggleLike();
         const elementsImage = this._element.querySelector('.element__mask-group');
         this._setEventListeners(elementsImage);

@@ -8,6 +8,10 @@ class Api {
         return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
     };
 
+    getDefaultData() {
+        return Promise.all([this.getUserInfoFromServer(), this.getCardsFromServer()]);
+    };
+
     getUserInfoFromServer() {
         return fetch(`${this._baseUrl}/users/me`,{
             headers: this._headers,

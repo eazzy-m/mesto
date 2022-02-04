@@ -36,61 +36,69 @@ const editAvatarForm = new FormValidator(avatarForm, validityConfig);
 editAvatarForm.enableValidation();
 editAvatarForm.toggleButtonState();
 
-api.getUserInfoFromServer()
-    .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
-    .catch(err => `При загрузке данных пользователя возникла ошибка ${err}`);
 
-api.getCardsFromServer()
-    .then(res => res.forEach(item => {
-        const card = createCard(item);
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement)}))
-    .catch(err => `При загрузке карточек возникла ошибка ${err}`);
+api.getDefaultData()
+    .then(([userData, cards]) => {
+        profileData.setUserInfo({name: userData.name, about: userData.about, id: userData._id, avatar: userData.avatar})
+        cards.forEach(item => {
+            const card = createCard(item);
+            const cardElement = card.generateCard();
+            cardList.addItem(cardElement)})})
+    .catch(err => alert(`При загрузке данных с сервера возникла ${err}`));
 
-function handleDeleteCard(cardId, popup) {
-    popup.toggleButtonName(true, 'Подождите...')
-    api.deleteCardFromServer(cardId)
-        .catch(err => `При удалении карточки возникла ошибка ${err}`)
-        .finally(() => popup.toggleButtonName(false, 'Да'));
+const popupConfirm = new PopupWithForm('.popup_confirm');
+popupConfirm.setEventListeners();
+
+function handleDeleteCard(card) {
+    popupConfirm.setSubmitCallback(() => {
+        popupConfirm.toggleButtonName(true, 'Подождите...');
+        api.deleteCardFromServer(card.id)
+            .then(() => {
+                card.removeCard();
+                popupConfirm.closePopup()})
+            .catch(err => alert(`При удалении карточки возникла ${err}`))
+            .finally(() => popupConfirm.toggleButtonName(false, 'Да'));
+    })
+    popupConfirm.openPopup();
 }
 
 function handleLikeCard(card) {
     api.changeLikeCard(card.id, card.isLiked())
         .then(data => card.updateLikeCounter(data))
-        .catch(err => console.log(`При обновлении лайка карточки возникла ошибка: ${err}`));
+        .catch(err => alert(`При обновлении лайка карточки возникла ${err}`));
 }
 
 const createCard = item => new Card(item,'#element-template', profileData.getUserInfo(), {
     handleCardClick: card => zoomCardPopup.openPopup(card),
-    handleDeleteCard: (cardId, popup) => handleDeleteCard(cardId, popup),
+    handleDeleteCard: (card) => handleDeleteCard(card),
     handleLikeCard: card => handleLikeCard(card)
 });
 
 function saveUserProfileOnServer(userData) {
     profilePopup.toggleButtonName(true, 'Сохранение...');
     api.patchUserInfo(userData)
-        .then(res => profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar}))
-        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
-        .finally(() => {
-            profilePopup.closePopup()
-            profilePopup.toggleButtonName(false, 'Cохранить')});
+        .then(res => {
+            profileData.setUserInfo({name: res.name, about: res.about, id: res._id, avatar: res.avatar});
+            profilePopup.closePopup()})
+        .catch(err => alert(`При обновлении данных пользователя возникла ${err}`))
+        .finally(() => profilePopup.toggleButtonName(false, 'Cохранить'));
 }
 
-const profilePopup = new PopupWithForm('.popup_profile',item => {
+const profilePopup = new PopupWithForm('.popup_profile', item => {
     saveUserProfileOnServer(item);
 });
 profilePopup.setEventListeners();
+
 
 function patchAvatar(imageLink) {
     editAvatarPopup.toggleButtonName(true, 'Сохранение...');
     api.patchUserAvatar(imageLink)
         .then(res => {
-            profileData.setUserAvatar(res.avatar)
-            editAvatarForm.toggleButtonState()})
-        .catch(err => console.log(`При отправке данных пользователя на сервер возникла ошибка: ${err}`))
-        .finally(() => {
+            profileData.setUserAvatar(res.avatar);
             editAvatarPopup.closePopup();
-            editAvatarPopup.toggleButtonName(false, 'Cохранить')});
+            editAvatarForm.toggleButtonState()})
+        .catch(err => alert(`При обновлении аватара возникла ${err}`))
+        .finally(() => editAvatarPopup.toggleButtonName(false, 'Cохранить'));
 }
 
 const editAvatarPopup = new PopupWithForm('.popup_avatar',item => patchAvatar(item));
@@ -105,10 +113,11 @@ const addCardPopup = new PopupWithForm('.popup_elements',item => {
         .then(res => {
             const card = createCard(res);
             const cardElement = card.generateCard();
+            addCardPopup.closePopup();
             cardList.addItem(cardElement)})
+        .catch(err => alert(`При добавлении карточки возникла ${err}`))
         .finally(() => {
             addCardPopup.toggleButtonName(false, 'Создать')
-            addCardPopup.closePopup();
             addNewCardForm.toggleButtonState();
     });
 });
