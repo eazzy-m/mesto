@@ -45,12 +45,12 @@ const createCard = item => new Card(item,'#element-template', profileData.getUse
 const addCardToPage = item => {
     const card = createCard(item);
     const cardElement = card.generateCard();
-    cardList.addItem(cardElement)
+    cardList.addItem(cardElement);
 }
 
 api.getDefaultData()
     .then(([userData, cards]) => {
-        profileData.setUserInfo({name: userData.name, about: userData.about, id: userData._id, avatar: userData.avatar})
+        profileData.setUserInfo({name: userData.name, about: userData.about, id: userData._id, avatar: userData.avatar});
         cards.forEach(item => addCardToPage(item))})
     .catch(err => {
         alert(`При загрузке данных с сервера возникла ${err}`);
@@ -68,8 +68,7 @@ function handleDeleteCard(card) {
                 card.removeCard();
                 popupConfirm.closePopup()})
             .catch(err => alert(`При удалении карточки возникла ${err}`))
-            .finally(() => popupConfirm.toggleButtonName(false, 'Да'));
-    })
+            .finally(() => popupConfirm.toggleButtonName(false, 'Да'))});
     popupConfirm.openPopup();
 }
 
@@ -89,9 +88,7 @@ function saveUserProfileOnServer(userData) {
         .finally(() => profilePopup.toggleButtonName(false, 'Cохранить'));
 }
 
-const profilePopup = new PopupWithForm('.popup_profile', item => {
-    saveUserProfileOnServer(item);
-});
+const profilePopup = new PopupWithForm('.popup_profile', item => saveUserProfileOnServer(item));
 profilePopup.setEventListeners();
 
 
@@ -120,7 +117,7 @@ const addCardPopup = new PopupWithForm('.popup_elements',item => {
             addCardPopup.closePopup()})
         .catch(err => alert(`При добавлении карточки возникла ${err}`))
         .finally(() => {
-            addCardPopup.toggleButtonName(false, 'Создать')
+            addCardPopup.toggleButtonName(false, 'Создать');
             addNewCardForm.toggleButtonState();
     });
 });
