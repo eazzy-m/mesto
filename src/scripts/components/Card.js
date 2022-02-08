@@ -29,7 +29,7 @@ class Card {
         const deleteCardButton = this._element.querySelector('.delete-element-button');
         this.ownerId === this.userId ?
             (deleteCardButton.addEventListener('click', () => this._handleDeleteCard(this)))
-         : (deleteCardButton.remove())
+            : (deleteCardButton.remove());
     };
 
     removeCard() {
