@@ -20,4 +20,4 @@
 
 Так же в процессе создания проекта активно использовался функционал Figma
 
-ссылка на макет: https://eazzy-m.github.io/mesto/
+ссылка на проект: https://eazzy-m.github.io/mesto/
